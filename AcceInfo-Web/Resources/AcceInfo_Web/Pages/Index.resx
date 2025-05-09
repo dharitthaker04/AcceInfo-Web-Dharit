@@ -1,110 +1,52 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <!-- 
-    Microsoft ResX Schema 
-    
-    Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
-    associated with the data types.
-    
-    Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
+<?xml version='1.0' encoding='utf-8'?>
+<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  
+  <xs:schema id="root">
+    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xs:element name="root" ns1:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="metadata">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" />
+              </xs:sequence>
+              <xs:attribute name="name" use="required" type="xsd:string" />
+              <xs:attribute name="type" type="xsd:string" />
+              <xs:attribute name="mimetype" type="xsd:string" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="assembly">
+            <xs:complexType>
+              <xs:attribute name="alias" type="xsd:string" />
+              <xs:attribute name="name" type="xsd:string" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="data">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
+              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
+              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
+              <xs:attribute ref="xml:space" />
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="resheader">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
+              </xs:sequence>
+              <xs:attribute name="name" type="xsd:string" use="required" />
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -254,4 +196,139 @@
   <data name="PaySendReceiveMoney" xml:space="preserve">
     <value>Pay, Send &amp; Receive Money</value>
   </data>
-</root>
+  <data name="QuickPaymentsTranfers" xml:space="preserve">
+    <value>Quick Payments &amp; Tranfers</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="Enteryourquestionhere" xml:space="preserve">
+    <value>Enter your question here</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="PaywithACCERewardsPoints" xml:space="preserve">
+    <value>Pay with ACCE Rewards Points</value>
+  </data>
+  <data name="TransfersandPayments" xml:space="preserve">
+    <value>Transfers and Payments</value>
+  </data>
+  <data name="SendInternationalMoneyTransfer" xml:space="preserve">
+    <value>Send an International Money Transfer</value>
+  </data>
+  <data name="PurchaseForeignCash" xml:space="preserve">
+    <value>Purchase Foreign Cash</value>
+  </data>
+  <data name="RegisterforINTERACe-TransferAutoDeposit" xml:space="preserve">
+    <value>Register for INTERAC e-Transfer AutoDeposit</value>
+  </data>
+  <data name="ManagePre-AuthorizedPayments" xml:space="preserve">
+    <value>Manage Pre-Authorized Payments</value>
+  </data>
+  <data name="StopChequeorPreAuthorizedPayment" xml:space="preserve">
+    <value>Stop a Cheque or Pre-Authorized Payment</value>
+  </data>
+  <data name="DailyTransactionLimits" xml:space="preserve">
+    <value>Daily Transaction Limits</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="PayABill" xml:space="preserve">
+    <value>Pay a Bill</value>
+  </data>
+  <data name="PayMultipleBills" xml:space="preserve">
+    <value>Pay Multiple Bills</value>
+  </data>
+  <data name="SendInterace-Transfer" xml:space="preserve">
+    <value>Send an Interac e-Transfer</value>
+  </data>
+  <data name="SendMoney" xml:space="preserve">
+    <value>Send Money</value>
+  </data>
+  <data name="RequestMoney" xml:space="preserve">
+    <value>Reques tMoney</value>
+  </data>
+  <data name="TransactionHistory" xml:space="preserve">
+    <value>Transaction History</value>
+  </data>
+  <data name="ManagePaymentsTransfers" xml:space="preserve">
+    <value>Manage Payments &amp; Transfers</value>
+  </data>
+  <data name="ManagePayeesRecipients" xml:space="preserve">
+    <value>Manage Payees &amp; Recipients</value>
+  </data>
+  <data name="ManageAccounts" xml:space="preserve">
+    <value>Manage Accounts</value>
+  </data>
+  <data name="TransferMoney" xml:space="preserve">
+    <value>Transfer Money</value>
+  </data>
+  <data name="ManageContact" xml:space="preserve">
+    <value>Manage Contact</value>
+  </data>
+  <data name="ManagePayees" xml:space="preserve">
+    <value>Manage Payees</value>
+  </data>
+  <data name="Transfer Money Successful!" xml:space="preserve">
+    <value>Transfer Money Successful!</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="TransferFrom" xml:space="preserve">
+    <value>TransferFrom</value>
+  </data>
+  <data name="TransferTo" xml:space="preserve">
+    <value>TransferTo</value>
+  </data>
+  <data name="StartDate" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>EndDate</value>
+  </data>
+  <data name="AnotherMember" xml:space="preserve">
+    <value>Another Member</value>
+  </data>
+  <data name="AddContact" xml:space="preserve">
+    <value>Add Contact</value>
+  </data>
+  <data name="ConfirmTransfer" xml:space="preserve">
+    <value>Confirm Transfer</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Memo" xml:space="preserve">
+    <value>Memo</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Frequency" xml:space="preserve">
+    <value>Frequency</value>
+  </data>
+  <data name="TransactionProcessingTitle" xml:space="preserve">
+    <value>When are my transactions processed?</value>
+  </data>
+  <data name="TransactionSameDay" xml:space="preserve">
+    <value>Transactions you make on business days before &lt;strong&gt;6 p.m.&lt;/strong&gt; will be processed by us the same day.</value>
+  </data>
+  <data name="TransactionNextDay" xml:space="preserve">
+    <value>Transactions made at all other times will be processed by us the next business day.</value>
+  </data>
+  <data name="ThirdPartyProcessingTime" xml:space="preserve">
+    <value>Payments to third parties (such as utility bills and non-RBC credit cards) often need more processing time by the third party — which generally takes up to &lt;strong&gt;3 business days&lt;/strong&gt;. It's a good idea to check with these third parties to find out how far in advance you should make the payments in order to meet their due date.</value>
+  </data>
+<data xml:space="preserve" name="Select"><value>Select</value></data><data xml:space="preserve" name="NameLabel"><value>Name</value></data><data xml:space="preserve" name="NickName"><value>Nick Name</value></data><data xml:space="preserve" name="PhoneNumber"><value>Phone Number</value></data><data xml:space="preserve" name="Email"><value>Email</value></data><data xml:space="preserve" name="SendTransfersBy"><value>Send transfers by</value></data><data xml:space="preserve" name="EmailMethod"><value>Email</value></data><data xml:space="preserve" name="MobilePhoneMethod"><value>Mobile phone</value></data><data xml:space="preserve" name="PreferredLanguage"><value>Contact’s preferred language</value></data><data xml:space="preserve" name="SaveContact"><value>Save Contact</value></data><data xml:space="preserve" name="Cancel"><value>Cancel</value></data><data xml:space="preserve" name="PleaseEnterName"><value>Please enter the contact's name.</value></data><data xml:space="preserve" name="PleaseEnterPhone"><value>Please enter a valid 10-digit numeric phone number.</value></data><data xml:space="preserve" name="PleaseEnterEmail"><value>Please enter a valid email address.</value></data><data xml:space="preserve" name="PleaseSelectTransferMethod"><value>Please select at least one transfer method.</value></data><data xml:space="preserve" name="PleaseSelectPreferredLanguage"><value>Please select a preferred language.</value></data></root>

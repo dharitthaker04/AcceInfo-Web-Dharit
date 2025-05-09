@@ -5,6 +5,12 @@
 @inject IJSRuntime JS
 @inject Blazored.LocalStorage.ILocalStorageService LocalStorage
 
+@using Blazored.LocalStorage
+@using System.Text.Json
+@using Microsoft.Extensions.Localization
+@inject ILocalStorageService LocalStorage
+@inject IStringLocalizer<AcceInfo_Web.Pages.Index> Localizer
+
 @using System.Text.Json
 @using System.Net.Http.Headers
 @using System.Text
@@ -47,7 +53,7 @@
                     <div class="col-md-12">
                         <div class="ribbon-1">
                             <div class="ribbon-box">
-                                <h3><div class="ribbon ribbon-mark bg-primary">Transfer Money</div></h3>
+                                <h3><div class="ribbon ribbon-mark bg-primary"> @(Localizer["TransferMoney"].ResourceNotFound ? "Missing" : Localizer["TransferMoney"])</div></h3>
 
                                 <div class="row">
                                     <div class="">
@@ -60,57 +66,82 @@
                                                         <div class="card-body">
                                                             <div class="text-center text-success">
                                                                 <i class="fas fa-check-circle fa-2x mb-2"></i>
-                                                                <h5 class="font-weight-bold">Transfer Money Successful!</h5>
+                                                                <h5 class="font-weight-bold">@(Localizer["Transfer Money Successful!"].ResourceNotFound ? "Missing" : Localizer["Transfer Money Successful!"])</h5>
                                                                 <p>@DateTime.Now.ToString("MMM dd, yyyy 'at' h:mm tt") ET</p>
                                                             </div>
 
                                                             <hr />
 
-                                                            <h6 class="text-primary font-weight-bold"><u>Transfer Money Details</u></h6>
+                                                            <h6 class="text-primary font-weight-bold">
+                                                                <u>@(Localizer["TransferMoneyDetails"].ResourceNotFound ? "Transfer Money Details" : Localizer["TransferMoneyDetails"])</u>
+                                                            </h6>
                                                             <dl class="row">
 
-                                                                <dt class="col-sm-5">Transaction ID:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["TransactionID"].ResourceNotFound ? "Transaction ID:" : Localizer["TransactionID"])
+                                                                </dt>
                                                                 <dd class="col-sm-7 text-success">@TransactionNumber</dd>
 
-                                                                <dt class="col-sm-5">Transfer From:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["TransferFrom"].ResourceNotFound ? "Transfer From:" : Localizer["TransferFrom"])
+                                                                </dt>
                                                                 <dd class="col-sm-7">@SelectedFromSummary</dd>
 
-                                                                <dt class="col-sm-5">Transfer To:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["TransferTo"].ResourceNotFound ? "Transfer To:" : Localizer["TransferTo"])
+                                                                </dt>
                                                                 <dd class="col-sm-7">@SelectedToSummary</dd>
 
-                                                                <dt class="col-sm-5">Amount:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["Amount"].ResourceNotFound ? "Amount:" : Localizer["Amount"])
+                                                                </dt>
                                                                 <dd class="col-sm-7">@($"{decimal.Parse(Model.Amount):C2}")</dd>
 
-                                                                <dt class="col-sm-5">Currency:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["Currency"].ResourceNotFound ? "Currency:" : Localizer["Currency"])
+                                                                </dt>
                                                                 <dd class="col-sm-7">CAD</dd>
 
-                                                                <dt class="col-sm-5">Frequency:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["Frequency"].ResourceNotFound ? "Frequency:" : Localizer["Frequency"])
+                                                                </dt>
                                                                 <dd class="col-sm-7">@Model.Frequency</dd>
 
                                                                 @if (Model.Frequency == "Once")
                                                                 {
-                                                                    <dt class="col-sm-5">Transfer Date:</dt>
+                                                                    <dt class="col-sm-5">
+                                                                        @(Localizer["TransferDate"].ResourceNotFound ? "Transfer Date:" : Localizer["TransferDate"])
+                                                                    </dt>
                                                                     <dd class="col-sm-7">@Model.Date?.ToString("MMMM dd, yyyy")</dd>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <dt class="col-sm-5">Start Date:</dt>
+                                                                    <dt class="col-sm-5">
+                                                                        @(Localizer["StartDate"].ResourceNotFound ? "Start Date:" : Localizer["StartDate"])
+                                                                    </dt>
                                                                     <dd class="col-sm-7">@Model.StartDate?.ToString("MMMM dd, yyyy")</dd>
 
-                                                                    <dt class="col-sm-5">End Date:</dt>
+                                                                    <dt class="col-sm-5">
+                                                                        @(Localizer["EndDate"].ResourceNotFound ? "End Date:" : Localizer["EndDate"])
+                                                                    </dt>
                                                                     <dd class="col-sm-7">@Model.EndDate?.ToString("MMMM dd, yyyy")</dd>
                                                                 }
 
-                                                                <dt class="col-sm-5">Memo:</dt>
+                                                                <dt class="col-sm-5">
+                                                                    @(Localizer["Memo"].ResourceNotFound ? "Memo:" : Localizer["Memo"])
+                                                                </dt>
                                                                 <dd class="col-sm-7">@Model.Memo</dd>
 
                                                             </dl>
 
                                                             <div class="row justify-content-center mt-4">
                                                                 <div class="col-md-4">
-                                                                    <button class="btn btn-primary w-100" @onclick="@(() => NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true))">Finish</button>
+                                                                    <button class="btn btn-primary w-100" @onclick="@(() => NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true))">
+                                                                        @(Localizer["Finish"].ResourceNotFound ? "Finish" : Localizer["Finish"])
+                                                                    </button>
                                                                 </div>
                                                             </div>
+
                                                         </div>
                                                     </div>
                                                 }
@@ -121,15 +152,24 @@
                                                         <div class="card-header bg-primary text-white"><h5 class="mb-0"><i class="fas fa-receipt"></i> Confirmation</h5></div>
                                                         <div class="card-body">
                                                             <dl class="row mb-0">
-                                                                <dt class="col-sm-4">Transfer From:</dt>
+                                                                <dt class="col-sm-4">
+                                                                    @(Localizer["TransferFrom"].ResourceNotFound ? "Transfer From:" : Localizer["TransferFrom"]):
+                                                                </dt>
                                                                 <dd class="col-sm-8">@SelectedFromSummary</dd>
-                                                                <dt class="col-sm-4">Transfer To:</dt>
+                                                                <dt class="col-sm-4">
+                                                                    @(Localizer["TransferTo"].ResourceNotFound ? "Missing" : Localizer["TransferTo"]):
+                                                                </dt>
                                                                 <dd class="col-sm-8">@SelectedToSummary</dd>
 
-                                                                <dt class="col-sm-4">Amount:</dt>
+                                                                <dt class="col-sm-4">
+                                                                    @(Localizer["Amount"].ResourceNotFound ? "Missing" : Localizer["Amount"]):
+                                                                </dt>
                                                                 <dd class="col-sm-8 text-primary font-weight-bold">@($"{Convert.ToDecimal(Model.Amount):C2}")</dd>
 
-                                                                <dt class="col-sm-4">Frequency:</dt>
+                                                                <dt class="col-sm-4">
+                                                                    @(Localizer["Frequency"].ResourceNotFound ? "Missing" : Localizer["Frequency"])
+                                                                    :
+                                                                </dt>
                                                                 <dd class="col-sm-8">@Model.Frequency</dd>
 
                                                                 @if (Model.Frequency == "Once")
@@ -139,23 +179,33 @@
                                                                 }
                                                                 else
                                                                 {
-                                                                    <dt class="col-sm-4">Start Date:</dt>
+                                                                    <dt class="col-sm-4">
+                                                                        @(Localizer["StartDate"].ResourceNotFound ? "Missing" : Localizer["StartDate"])
+                                                                    </dt>
                                                                     <dd class="col-sm-8">@Model.StartDate?.ToString("yyyy-MM-dd")</dd>
-                                                                    <dt class="col-sm-4">End Date:</dt>
+                                                                    <dt class="col-sm-4">
+                                                                        @(Localizer["EndDate"].ResourceNotFound ? "Missing" : Localizer["EndDate"])
+                                                                    </dt>
                                                                     <dd class="col-sm-8">@Model.EndDate?.ToString("yyyy-MM-dd")</dd>
                                                                 }
 
-                                                                <dt class="col-sm-4">Memo:</dt>
+                                                                <dt class="col-sm-4">
+                                                                    @(Localizer["Memo"].ResourceNotFound ? "Missing" : Localizer["Memo"])
+                                                                </dt>
                                                                 <dd class="col-sm-8">@Model.Memo</dd>
                                                             </dl>
 
                                                             <div class="text-right mt-3">
                                                                 <div class="row justify-content-end">
                                                                     <div class="col-md-3">
-                                                                        <button class="btn btn-outline-primary w-100" @onclick="BackToForm">Back</button>
+                                                                        <button class="btn btn-outline-primary w-100" @onclick="BackToForm">                                                                    @(Localizer["Memo"].ResourceNotFound ? "Missing" : Localizer["Memo"])
+                                                                            @(Localizer["back"].ResourceNotFound ? "Missing" : Localizer["back"])
+                                                                        </button>
                                                                     </div>
                                                                     <div class="col-md-4">
-                                                                        <button class="btn btn-primary w-100" @onclick="SubmitPayBill">Confirm Transfer</button>
+                                                                        <button class="btn btn-primary w-100" @onclick="SubmitPayBill">
+                                                                            @(Localizer["ConfirmTransfer"].ResourceNotFound ? "Missing" : Localizer["ConfirmTransfer"])
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -172,10 +222,14 @@
                                                             <div class="single-pro-info-tab">
                                                                 <ul class="nav nav-pills mb-0 nav-justified" id="pills-tab" role="tablist">
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link @(ActiveTab == "MyAccounts" ? "active" : "")" data-toggle="pill" href="#pay-with-acce-accounts">My Accounts</a>
+                                                                        <a class="nav-link @(ActiveTab == "MyAccounts" ? "active" : "")" data-toggle="pill" href="#pay-with-acce-accounts">
+                                                                            @(Localizer["MyAccounts"].ResourceNotFound ? "Missing" : Localizer["MyAccounts"])
+                                                                        </a>
                                                                     </li>
                                                                     <li class="nav-item">
-                                                                        <a class="nav-link @(ActiveTab == "AnotherMember" ? "active" : "")" data-toggle="pill" href="#pay-with-acce-rewards-points">Another Member</a>
+                                                                        <a class="nav-link @(ActiveTab == "AnotherMember" ? "active" : "")" data-toggle="pill" href="#pay-with-acce-rewards-points">
+                                                                            @(Localizer["AnotherMember"].ResourceNotFound ? "Missing" : Localizer["AnotherMember"])
+                                                                        </a>
                                                                     </li>
                                                                 </ul>
                                                             </div>
@@ -189,7 +243,10 @@
                                                                                 <div class="col-md-10">
                                                                                     <form class="mb-0">
                                                                                         <div class="form-group">
-                                                                                            <label>Transfer From <small class="text-danger font-13">*</small></label>
+                                                                                            <label>
+                                                                                                @(Localizer["TransferFrom"].ResourceNotFound ? "Missing" : Localizer["TransferFrom"])
+                                                                                                <small class="text-danger font-13">*</small>
+                                                                                            </label>
                                                                                             <select class="form-control" @bind="SelectedTransferFrom">
                                                                                                 <option value="">Select</option>
                                                                                                 @foreach (var account in Accounts)
@@ -203,7 +260,10 @@
                                                                                             }
                                                                                         </div>
                                                                                         <div class="form-group">
-                                                                                            <label>Transfer To <small class="text-danger font-13">*</small></label>
+                                                                                            <label>
+                                                                                                @(Localizer["TransferTo"].ResourceNotFound ? "Missing" : Localizer["TransferTo"])
+                                                                                                <small class="text-danger font-13">*</small>
+                                                                                            </label>
                                                                                             <select class="form-control" @bind="SelectedTransferTo">
                                                                                                 <option>Select</option>
                                                                                                 @foreach (var account in Accounts)
@@ -226,13 +286,18 @@
                                                                                                 }
                                                                                             </div>
                                                                                             <div class="form-group col-md-4">
-                                                                                                <label>Currency</label>
+                                                                                                <label>
+                                                                                                    @(Localizer["Currency"].ResourceNotFound ? "Missing" : Localizer["Currency"])
+                                                                                                </label>
                                                                                                 <select class="form-control">
                                                                                                     <option>CAD</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group col-md-4">
-                                                                                                <label>Frequency <small class="text-danger font-13">*</small></label>
+                                                                                                <label>
+                                                                                                    @(Localizer["Frequency"].ResourceNotFound ? "Missing" : Localizer["Frequency"])
+                                                                                                    <small class="text-danger font-13">*</small>
+                                                                                                </label>
                                                                                                 <select class="form-control" @bind="SelectedFrequencyTab1">
                                                                                                     <option value="Once">Once</option>
                                                                                                     <option value="Weekly">Weekly</option>
@@ -245,7 +310,10 @@
                                                                                             @if (SelectedFrequencyTab1 == "Once")
                                                                                             {
                                                                                                 <div class="form-group col-md-6">
-                                                                                                    <label>Date <small class="text-danger font-13">*</small></label>
+                                                                                                    <label>
+                                                                                                        @(Localizer["Date"].ResourceNotFound ? "Missing" : Localizer["Date"])
+                                                                                                        <small class="text-danger font-13">*</small>
+                                                                                                    </label>
                                                                                                     <input class="form-control" type="date" @bind="OnceDateTab1" />
                                                                                                     @if (ShowValidation && (!OnceDateTab1.HasValue || OnceDateTab1.Value < DateTime.Today))
                                                                                                     {
@@ -256,7 +324,10 @@
                                                                                             else
                                                                                             {
                                                                                                 <div class="form-group col-md-6">
-                                                                                                    <label>Start Date <small class="text-danger font-13">*</small></label>
+                                                                                                    <label>
+                                                                                                        @(Localizer["StartDate"].ResourceNotFound ? "Missing" : Localizer["StartDate"])
+                                                                                                        <small class="text-danger font-13">*</small>
+                                                                                                    </label>
                                                                                                     <input class="form-control" type="date" @bind="StartDateTab1" />
                                                                                                     @if (ShowValidation && (!StartDateTab1.HasValue || StartDateTab1.Value < DateTime.Today))
                                                                                                     {
@@ -264,7 +335,10 @@
                                                                                                     }
                                                                                                 </div>
                                                                                                 <div class="form-group col-md-6">
-                                                                                                    <label>End Date <small class="text-danger font-13">*</small></label>
+                                                                                                    <label>
+                                                                                                        @(Localizer["EndDate"].ResourceNotFound ? "Missing" : Localizer["EndDate"])
+                                                                                                        <small class="text-danger font-13">*</small>
+                                                                                                    </label>
                                                                                                     <input class="form-control" type="date" @bind="EndDateTab1" />
                                                                                                     @if (ShowValidation && (!EndDateTab1.HasValue || EndDateTab1.Value <= StartDateTab1))
                                                                                                     {
@@ -275,13 +349,17 @@
                                                                                         </div>
 
                                                                                         <div class="form-group">
-                                                                                            <label>Memo</label>
+                                                                                            <label>
+                                                                                                @(Localizer["Memo"].ResourceNotFound ? "Missing" : Localizer["Memo"])
+                                                                                            </label>
                                                                                             <input type="text" class="form-control" @bind="MemoTab1" placeholder="Enter memo (optional)" />
                                                                                         </div>
 
                                                                                         <div class="form-row justify-content-end">
                                                                                             <div class="col-md-3">
-                                                                                                <button type="button" class="btn btn-primary w-100" @onclick="OnMyAccountsContinue">Continue</button>
+                                                                                                <button type="button" class="btn btn-primary w-100" @onclick="OnMyAccountsContinue">
+                                                                                                    @(Localizer["Continue"].ResourceNotFound ? "Missing" : Localizer["Continue"])
+                                                                                                </button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </form>
@@ -292,6 +370,7 @@
                                                                 </div>
 
                                                                 <!-- Another Member Tab -->
+                                                                <!-- Another Member Tab -->
                                                                 <div class="tab-pane fade @(ActiveTab == "AnotherMember" ? "show active" : "")" id="pay-with-acce-rewards-points">
                                                                     <div class="row">
                                                                         <div class="col-md-12">
@@ -299,24 +378,33 @@
                                                                                 <div class="col-md-10">
                                                                                     <form class="mb-0">
                                                                                         <div class="form-group">
-                                                                                            <label>Transfer From *</label>
+                                                                                            <label>
+                                                                                                @(Localizer["TransferFrom"].ResourceNotFound ? "Missing" : Localizer["TransferFrom"])
+                                                                                                <small class="text-danger font-13">*</small>
+                                                                                            </label>
                                                                                             <select class="form-control" @bind="SelectedTransferFromTab2">
-                                                                                                <option>Select</option>
+                                                                                                <option>@(Localizer["Select"].ResourceNotFound ? "Missing" : Localizer["Select"])</option>
                                                                                                 @foreach (var account in Accounts)
                                                                                                 {
                                                                                                     <option value="@account.AccountId">@account.AccountName - @account.AccountCategoryName - @account.AccountNumber = @account.Balance.ToString("C")</option>
                                                                                                 }
                                                                                             </select>
-                                                                                            <button type="button" class="btn btn-outline-primary btn-sm  mt-2  float-right" id="addContactBtn" @onclick="ShowAddModal">+ Add Contact</button>
+                                                                                            <button type="button" class="btn btn-outline-primary btn-sm mt-2 float-right" id="addContactBtn" @onclick="ShowAddModal">
+                                                                                                @(Localizer["AddContact"].ResourceNotFound ? "Missing" : Localizer["AddContact"])
+                                                                                            </button>
                                                                                             @if (ShowValidationAM && string.IsNullOrWhiteSpace(SelectedTransferFromTab2))
                                                                                             {
                                                                                                 <div class="text-danger">Please select the account to transfer from.</div>
                                                                                             }
                                                                                         </div>
+
                                                                                         <div class="form-group">
-                                                                                            <label>Transfer To *</label>
+                                                                                            <label>
+                                                                                                @(Localizer["TransferTo"].ResourceNotFound ? "Missing" : Localizer["TransferTo"])
+                                                                                                <small class="text-danger font-13">*</small>
+                                                                                            </label>
                                                                                             <select class="form-control" @bind="SelectedTransferToTab2">
-                                                                                                <option>Select</option>
+                                                                                                <option>@(Localizer["Select"].ResourceNotFound ? "Missing" : Localizer["Select"])</option>
                                                                                                 @foreach (var contact in Contacts)
                                                                                                 {
                                                                                                     <option value="@contact.AccountId">@($"{contact.Name ?? contact.NickName} - {contact.AccountNumber}")</option>
@@ -327,9 +415,13 @@
                                                                                                 <div class="text-danger">Please select the account to transfer to.</div>
                                                                                             }
                                                                                         </div>
+
                                                                                         <div class="form-row">
                                                                                             <div class="form-group col-md-4">
-                                                                                                <label>Amount *</label>
+                                                                                                <label>
+                                                                                                    @(Localizer["Amount"].ResourceNotFound ? "Missing" : Localizer["Amount"])
+                                                                                                    <small class="text-danger font-13">*</small>
+                                                                                                </label>
                                                                                                 <input type="text" class="form-control" placeholder="$0.00" @bind="AmountTab2">
                                                                                                 @if (ShowValidationAM && string.IsNullOrWhiteSpace(AmountTab2))
                                                                                                 {
@@ -337,13 +429,18 @@
                                                                                                 }
                                                                                             </div>
                                                                                             <div class="form-group col-md-4">
-                                                                                                <label>Currency</label>
+                                                                                                <label>
+                                                                                                    @(Localizer["Currency"].ResourceNotFound ? "Missing" : Localizer["Currency"])
+                                                                                                </label>
                                                                                                 <select class="form-control">
                                                                                                     <option>CAD</option>
                                                                                                 </select>
                                                                                             </div>
                                                                                             <div class="form-group col-md-4">
-                                                                                                <label>Frequency *</label>
+                                                                                                <label>
+                                                                                                    @(Localizer["Frequency"].ResourceNotFound ? "Missing" : Localizer["Frequency"])
+                                                                                                    <small class="text-danger font-13">*</small>
+                                                                                                </label>
                                                                                                 <select class="form-control" @bind="SelectedFrequencyTab2">
                                                                                                     <option value="Once">Once</option>
                                                                                                     <option value="Weekly">Weekly</option>
@@ -352,11 +449,15 @@
                                                                                                 </select>
                                                                                             </div>
                                                                                         </div>
+
                                                                                         <div class="form-row">
                                                                                             @if (SelectedFrequencyTab2 == "Once")
                                                                                             {
                                                                                                 <div class="form-group col-md-6">
-                                                                                                    <label>Date *</label>
+                                                                                                    <label>
+                                                                                                        @(Localizer["Date"].ResourceNotFound ? "Missing" : Localizer["Date"])
+                                                                                                        <small class="text-danger font-13">*</small>
+                                                                                                    </label>
                                                                                                     <input class="form-control" type="date" @bind="OnceDateTab2">
                                                                                                     @if (ShowValidationAM && (!OnceDateTab2.HasValue || OnceDateTab2.Value < DateTime.Today))
                                                                                                     {
@@ -367,7 +468,10 @@
                                                                                             else
                                                                                             {
                                                                                                 <div class="form-group col-md-6">
-                                                                                                    <label>Start Date *</label>
+                                                                                                    <label>
+                                                                                                        @(Localizer["StartDate"].ResourceNotFound ? "Missing" : Localizer["StartDate"])
+                                                                                                        <small class="text-danger font-13">*</small>
+                                                                                                    </label>
                                                                                                     <input class="form-control" type="date" @bind="StartDateTab2">
                                                                                                     @if (ShowValidationAM && (!StartDateTab2.HasValue || StartDateTab2.Value < DateTime.Today))
                                                                                                     {
@@ -375,7 +479,10 @@
                                                                                                     }
                                                                                                 </div>
                                                                                                 <div class="form-group col-md-6">
-                                                                                                    <label>End Date *</label>
+                                                                                                    <label>
+                                                                                                        @(Localizer["EndDate"].ResourceNotFound ? "Missing" : Localizer["EndDate"])
+                                                                                                        <small class="text-danger font-13">*</small>
+                                                                                                    </label>
                                                                                                     <input class="form-control" type="date" @bind="EndDateTab2">
                                                                                                     @if (ShowValidationAM && (!EndDateTab2.HasValue || EndDateTab2.Value <= StartDateTab2))
                                                                                                     {
@@ -384,13 +491,19 @@
                                                                                                 </div>
                                                                                             }
                                                                                         </div>
+
                                                                                         <div class="form-group">
-                                                                                            <label>Memo</label>
+                                                                                            <label>
+                                                                                                @(Localizer["Memo"].ResourceNotFound ? "Missing" : Localizer["Memo"])
+                                                                                            </label>
                                                                                             <input type="text" class="form-control" @bind="MemoTab2" placeholder="Enter memo (optional)" />
                                                                                         </div>
+
                                                                                         <div class="form-row justify-content-end">
                                                                                             <div class="col-md-3">
-                                                                                                <button type="button" class="btn btn-primary w-100" @onclick="OnAnotherMemberContinue">Continue</button>
+                                                                                                <button type="button" class="btn btn-primary w-100" @onclick="OnAnotherMemberContinue">
+                                                                                                    @(Localizer["Continue"].ResourceNotFound ? "Missing" : Localizer["Continue"])
+                                                                                                </button>
                                                                                             </div>
                                                                                         </div>
                                                                                     </form>
@@ -411,11 +524,16 @@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="alert alert-outline-primary mb-0" role="alert">
-                                                                <h4 class="alert-heading font-18"><i class="fas fa-info-circle"></i> When are my transactions processed?</h4>
-                                                                <p>Transactions you make on business days before <strong>6 p.m.</strong> will be processed by us the same day.</p>
-                                                                <p>Transactions made at all other times will be processed by us the next business day.</p>
-                                                                <p>Payments to third parties (such as utility bills and non-RBC credit cards) often need more processing time by the third party — which generally takes up to <strong>3 business days</strong>. It's a good idea to check with these third parties to find out how far in advance you should make the payments in order to meet their due date.</p>
+                                                                <h4 class="alert-heading font-18">
+                                                                    <i class="fas fa-info-circle"></i>
+                                                                    @(Localizer["TransactionProcessingTitle"].ResourceNotFound ? "When are my transactions processed?" : Localizer["TransactionProcessingTitle"])
+                                                                </h4>
+                                                                <p>@((MarkupString)(Localizer["TransactionSameDay"].ResourceNotFound ? "Transactions you make on business days before <strong>6 p.m.</strong> will be processed by us the same day." : Localizer["TransactionSameDay"].Value))</p>
+                                                                <p>@((MarkupString)(Localizer["TransactionNextDay"].ResourceNotFound ? "Transactions made at all other times will be processed by us the next business day." : Localizer["TransactionNextDay"].Value))</p>
+                                                                <p>@((MarkupString)(Localizer["ThirdPartyProcessingTime"].ResourceNotFound ? "Payments to third parties... 3 business days" : Localizer["ThirdPartyProcessingTime"].Value))</p>
                                                             </div>
+
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -437,107 +555,104 @@
  </div>
    
 
-    @if (ShowModal)
-    {
-            <div class="modal show d-block" tabindex="-1" role="dialog" style="overflow-y: auto;">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add Contact</h5>
-                        <button type="button" class="close" @onclick="CloseModal"><span>&times;</span></button>
-                    </div>
-                <div class="modal-body" style="max-height: 70vh; overflow-y: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;">
-                        <div class="form-group">
-                            <label>Name <small class="text-danger font-13">*</small></label>
-                            <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Name) ? "is-invalid" : "")"
-                                   @bind="NewContact.Name" />
-                            @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Name))
-                            {
-                                <div class="text-danger mt-1">Please enter the contact's name.</div>
-                            }
-                        </div>
-
-                        <div class="form-group">
-                            <label>Nick Name</label>
-                            <input class="form-control" @bind="NewContact.NickName" />
-                        </div>
-
-                        <div class="form-group">
-                            <label>Phone Number <small class="text-danger font-13">*</small></label>
-                            <div class="input-group">
-                                <select class="form-control" style="max-width: 100px;" @bind="NewContact.CountryCode">
-                                    <option value="+1">+1</option>
-                                    <option value="+44">+44</option>
-                                    <option value="+91">+91</option>
-                                </select>
-                               @*  <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.PhoneNumber) ? "is-invalid" : "")"
-                                       @bind="NewContact.PhoneNumber" /> *@
-                                <input inputmode="numeric" pattern="\d*" maxlength="10"
-                                       class="form-control @(SubmitAttempted && !IsPhoneNumberValid ? "is-invalid" : "")"
-                                       @bind="NewContact.PhoneNumber"
-                                       @oninput="ValidatePhoneNumber" />
-                            </div>
-                            @if (SubmitAttempted && !IsPhoneNumberValid)
-                            {
-                                <div class="text-danger mt-1">Please enter a valid 10-digit numeric phone number.</div>
-                            }
-                        </div>
-
-                        <div class="form-group">
-                            <label>Email <small class="text-danger font-13">*</small></label>
-                            <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Email) ? "is-invalid" : "")"
-                                   type="email" @bind="NewContact.Email" />
-                            @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Email))
-                            {
-                                <div class="text-danger mt-1">Please enter a valid email address.</div>
-                            }
-                        </div>
-
-                        <div class="form-group required">
-                            <label>Send transfers by <small class="text-danger font-13">*</small></label>
-                            <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
-                                <label class="btn btn-outline-secondary flex-fill @(NewContact.TransferByEmail ? "active" : "")"
-                                       @onclick="@(() => NewContact.TransferByEmail = !NewContact.TransferByEmail)">
-                                    <input type="checkbox" class="d-none" /> Email
-                                </label>
-                                <label class="btn btn-outline-secondary flex-fill @(NewContact.TransferByPhone ? "active" : "")"
-                                       @onclick="@(() => NewContact.TransferByPhone = !NewContact.TransferByPhone)">
-                                    <input type="checkbox" class="d-none" /> Mobile phone
-                                </label>
-                            </div>
-                            @if (SubmitAttempted && !NewContact.TransferByEmail && !NewContact.TransferByPhone)
-                            {
-                                <div class="text-danger mt-1">Please select at least one transfer method.</div>
-                            }
-                        </div>
-
-                        <div class="form-group required">
-                            <label>Contact’s preferred language <small class="text-danger font-13">*</small></label>
-                            <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
-                                <label class="btn btn-outline-secondary flex-fill @(NewContact.PreferredLanguage == "English" ? "active" : "")">
-                                    <input type="radio" value="English" class="d-none" @onchange="@(() => NewContact.PreferredLanguage = "English")" /> English
-                                </label>
-                                <label class="btn btn-outline-secondary flex-fill @(NewContact.PreferredLanguage == "French" ? "active" : "")">
-                                    <input type="radio" value="French" class="d-none" @onchange="@(() => NewContact.PreferredLanguage = "French")" /> French
-                                </label>
-                            </div>
-                            @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.PreferredLanguage))
-                            {
-                                <div class="text-danger mt-1">Please select a preferred language.</div>
-                            }
-                        </div>
+@if (ShowModal)
+{
+    <div class="modal show d-block" tabindex="-1" role="dialog" style="overflow-y: auto;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">@Localizer["AddContact"]</h5>
+                    <button type="button" class="close" @onclick="CloseModal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                    <div class="form-group">
+                        <label>@Localizer["NameLabel"] <small class="text-danger font-13">*</small></label>
+                        <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Name) ? "is-invalid" : "")"
+                               @bind="NewContact.Name" />
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Name))
+                        {
+                            <div class="text-danger mt-1">@Localizer["PleaseEnterName"]</div>
+                        }
                     </div>
 
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" @onclick="AddContactAsync">Save Contact</button>
-                            <button class="btn btn-danger" @onclick="CloseModal">Cancel</button>
+                    <div class="form-group">
+                        <label>@Localizer["NickName"]</label>
+                        <input class="form-control" @bind="NewContact.NickName" />
                     </div>
+
+                    <div class="form-group">
+                        <label>@Localizer["PhoneNumber"] <small class="text-danger font-13">*</small></label>
+                        <div class="input-group">
+                            <select class="form-control" style="max-width: 100px;" @bind="NewContact.CountryCode">
+                                <option value="+1">+1</option>
+                                <option value="+44">+44</option>
+                                <option value="+91">+91</option>
+                            </select>
+                            <input inputmode="numeric" pattern="\d*" maxlength="10"
+                                   class="form-control @(SubmitAttempted && !IsPhoneNumberValid ? "is-invalid" : "")"
+                                   @bind="NewContact.PhoneNumber"
+                                   @oninput="ValidatePhoneNumber" />
+                        </div>
+                        @if (SubmitAttempted && !IsPhoneNumberValid)
+                        {
+                            <div class="text-danger mt-1">@Localizer["PleaseEnterPhone"]</div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label>@Localizer["Email"] <small class="text-danger font-13">*</small></label>
+                        <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Email) ? "is-invalid" : "")"
+                               type="email" @bind="NewContact.Email" />
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Email))
+                        {
+                            <div class="text-danger mt-1">@Localizer["PleaseEnterEmail"]</div>
+                        }
+                    </div>
+
+                    <div class="form-group required">
+                        <label>@Localizer["SendTransfersBy"] <small class="text-danger font-13">*</small></label>
+                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.TransferByEmail ? "active" : "")"
+                                   @onclick="@(() => NewContact.TransferByEmail = !NewContact.TransferByEmail)">
+                                <input type="checkbox" class="d-none" /> @Localizer["EmailMethod"]
+                            </label>
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.TransferByPhone ? "active" : "")"
+                                   @onclick="@(() => NewContact.TransferByPhone = !NewContact.TransferByPhone)">
+                                <input type="checkbox" class="d-none" /> @Localizer["MobilePhoneMethod"]
+                            </label>
+                        </div>
+                        @if (SubmitAttempted && !NewContact.TransferByEmail && !NewContact.TransferByPhone)
+                        {
+                            <div class="text-danger mt-1">@Localizer["PleaseSelectTransferMethod"]</div>
+                        }
+                    </div>
+
+                    <div class="form-group required">
+                        <label>@Localizer["PreferredLanguage"] <small class="text-danger font-13">*</small></label>
+                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.PreferredLanguage == "English" ? "active" : "")">
+                                <input type="radio" value="English" class="d-none" @onchange="@(() => NewContact.PreferredLanguage = "English")" /> English
+                            </label>
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.PreferredLanguage == "French" ? "active" : "")">
+                                <input type="radio" value="French" class="d-none" @onchange="@(() => NewContact.PreferredLanguage = "French")" /> Français
+                            </label>
+                        </div>
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.PreferredLanguage))
+                        {
+                            <div class="text-danger mt-1">@Localizer["PleaseSelectPreferredLanguage"]</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" @onclick="AddContactAsync">@Localizer["SaveContact"]</button>
+                    <button class="btn btn-danger" @onclick="CloseModal">@Localizer["Cancel"]</button>
                 </div>
             </div>
         </div>
-        <div class="modal-backdrop fade show"></div>
-    }
-
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
 <!-- Toast -->
 <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
     <div id="customToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" data-autohide="true">

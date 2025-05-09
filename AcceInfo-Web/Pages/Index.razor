@@ -516,7 +516,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter your question here" aria-label="Enter your question here" aria-describedby="button-addon2">
+                    <input type="text" class="form-control" placeholder=" @(Localizer["Enteryourquestionhere"].ResourceNotFound ? "Missing" : Localizer["Enteryourquestionhere"])" aria-label="Enter your question here" aria-describedby="button-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button" id="button-addon2"><i class="mdi mdi-magnify"></i></button>
                         </div>
@@ -524,7 +524,7 @@
                 </div><!--end card-body-->
             </div><!--end card-->
 
-            <h4>Quick Payments & Tranfers</h4>
+        <h4> @(Localizer["QuickPaymentsTranfers"].ResourceNotFound ? "Missing" : Localizer["QuickPaymentsTranfers"])</h4>
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -533,7 +533,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>From <small class="text-danger font-13">*</small></label>
+                                        <label> @(Localizer["From"].ResourceNotFound ? "Missing" : Localizer["From"]) <small class="text-danger font-13">*</small></label>
                                             <select class="form-control">
                                                 <option>No Saeed! = $0.00 USD</option>
                                             </select>
@@ -541,7 +541,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>To <small class="text-danger font-13">*</small></label>
+                                        <label> @(Localizer["To"].ResourceNotFound ? "Missing" : Localizer["To"]) <small class="text-danger font-13">*</small></label>
                                             <select class="form-control">
                                                 <option>Select</option>
                                             </select>
@@ -551,7 +551,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Amount <small class="text-danger font-13">*</small></label>
+                                        <label> @(Localizer["Amount"].ResourceNotFound ? "Missing" : Localizer["Amount"]) <small class="text-danger font-13">*</small></label>
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div class="input-daterange input-group" id="date-range">
@@ -568,7 +568,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="btn-toolbar sw-toolbar sw-toolbar-bottom">
-                                            <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
+                                        <button type="button" class="btn btn-primary btn-lg btn-block"> @(Localizer["Submit"].ResourceNotFound ? "Missing" : Localizer["Submit"])</button>
                                         </div>
                                     </div>
                                 </div>
@@ -579,7 +579,7 @@
                     <hr>
                     <div class="row text-center">
                         <div class="col-md-12 align-self-center">
-                            <a href="#" class="text-primary"> <i class="mdi mdi-diamond"></i> Pay with ACCE Rewards Points</a>
+                        <a href="#" class="text-primary"> <i class="mdi mdi-diamond"></i> @(Localizer["PaywithACCERewardsPoints"].ResourceNotFound ? "Missing" : Localizer["PaywithACCERewardsPoints"])</a>
                         </div><!--end col-->
                     </div><!--end row-->
                 </div><!--end card-body-->
@@ -589,13 +589,13 @@
                 <div class="card-body profile-nav">
                     <h5 class="my-4">Transfers and Payments</h5>
                     <div class="nav flex-column nav-pills" id="profile-tab" aria-orientation="vertical">
-                        <a class="nav-link" id="add-payee-tab" data-toggle="pill" href="#add-payee" aria-selected="true">Send an International Money Transfer</a>
-                        <a class="nav-link" id="register-for-interac-e-transfer-autodeposit-tab" data-toggle="pill" href="#register-for-interac-e-transfer-autodeposit" aria-selected="false">Transfer Money Cross-Border</a>
-                        <a class="nav-link d-flex justify-content-between align-items-center" id="add-interac-e-transfer-recipient-tab" data-toggle="pill" href="#add-interac-e-transfer-recipient" aria-selected="false">Purchase Foreign Cash</a>
-                        <a class="nav-link mb-0" id="add-other-acce-royal-bank-customer-tab" data-toggle="pill" href="#add-other-acce-royal-bank-customer" aria-selected="false">Register for INTERAC e-Transfer AutoDeposit</a>
-                        <a class="nav-link mb-0" id="nickname-payees-tab" data-toggle="pill" href="#nickname-payees" aria-selected="false">Manage Pre-Authorized Payments</a>
-                        <a class="nav-link mb-0" href="acce-stop-payment-request.html" aria-selected="false">Stop a Cheque or Pre-Authorized Payment</a>
-                        <a class="nav-link mb-0" id="nickname-payees-tab" data-toggle="pill" href="#nickname-payees" aria-selected="false">Daily Transaction Limits</a>
+                    <a class="nav-link" id="add-payee-tab" data-toggle="pill" href="#add-payee" aria-selected="true"> @(Localizer["SendInternationalMoneyTransfer"].ResourceNotFound ? "Missing" : Localizer["SendInternationalMoneyTransfer"])</a>
+                        @* <a class="nav-link" id="register-for-interac-e-transfer-autodeposit-tab" data-toggle="pill" href="#register-for-interac-e-transfer-autodeposit" aria-selected="false">Transfer Money Cross-Border</a> *@
+                    <a class="nav-link d-flex justify-content-between align-items-center" id="add-interac-e-transfer-recipient-tab" data-toggle="pill" href="#add-interac-e-transfer-recipient" aria-selected="false"> @(Localizer["PurchaseForeignCash"].ResourceNotFound ? "Missing" : Localizer["PurchaseForeignCash"])</a>
+                    <a class="nav-link mb-0" id="add-other-acce-royal-bank-customer-tab" data-toggle="pill" href="#add-other-acce-royal-bank-customer" aria-selected="false"> @(Localizer["RegisterforINTERACe-TransferAutoDeposit"].ResourceNotFound ? "Missing" : Localizer["RegisterforINTERACe-TransferAutoDeposit"])</a>
+                    <a class="nav-link mb-0" id="nickname-payees-tab" data-toggle="pill" href="#nickname-payees" aria-selected="false"> @(Localizer["ManagePre-AuthorizedPayments"].ResourceNotFound ? "Missing" : Localizer["ManagePre-AuthorizedPayments"])</a>
+                    <a class="nav-link mb-0" href="acce-stop-payment-request.html" aria-selected="false"> @(Localizer["StopChequeorPreAuthorizedPayment"].ResourceNotFound ? "Missing" : Localizer["StopChequeorPreAuthorizedPayment"])</a>
+                    <a class="nav-link mb-0" id="nickname-payees-tab" data-toggle="pill" href="#nickname-payees" aria-selected="false"> @(Localizer["DailyTransactionLimits"].ResourceNotFound ? "Missing" : Localizer["DailyTransactionLimits"])</a>
                     </div>
                 </div><!--end card-body-->
             </div><!--end card-->

@@ -1,0 +1,344 @@
+﻿@page "/manage-accounts"
+@layout MainLayout
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject IJSRuntime JS
+
+@using System.Text.Json
+@using System.ComponentModel.DataAnnotations
+
+<div class="row">
+    <SideNavSlider />
+    <div class="col-lg-9">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        @if (IsLoading)
+                        {
+                            <div class="spinner-overlay">
+                                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="float-left mt-2">
+                            <h3 class="text-primary"><u>Manage Accounts</u></h3>
+                        </div>
+                        <div class="float-right mt-2">
+                            <button class="btn btn-primary px-4" @onclick="ShowModal">ADD</button>
+                        </div>
+
+                        <table class="table mb-0 mt-3" id="accountsTable">
+                            <thead>
+                                <tr>
+                                    <th>Account Name</th>
+                                    <th>Account Type</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var account in Accounts)
+                                {
+                                    <tr>
+                                        <td>@account.AccountName</td>
+                                        <td>@account.AccountCategoryName</td>
+                                        <td>$@account.Balance.ToString("0.00")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowAccountModal)
+{
+    <div class="modal show d-block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Account</h5>
+                    <button type="button" class="close" @onclick="HideModal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                            <label>Account Type <small class="text-danger font-13">*</small></label>
+                        <select class="form-control" @bind="NewAccount.AccountCategoryId">
+                            <option value="">-- Select Account Type --</option>
+                            @foreach (var type in AccountTypes)
+                            {
+                                <option value="@type.AccountCategoryId">@type.Name</option>
+                            }
+                        </select>
+                        @if (ShowAccountTypeError)
+                        {
+                            <div class="text-danger">Please select an account type.</div>
+                        }
+                    </div>
+                    <div class="form-group">
+                            <label>Account Name <small class="text-danger font-13">*</small></label>
+                        <input type="text" class="form-control" @bind="NewAccount.AccountName" />
+                        @if (ShowAccountNameError)
+                        {
+                            <div class="text-danger">Please enter the account name.</div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label>Amount <small class="text-danger font-13">*</small></label>
+                        <input type="text" class="form-control" @bind="NewAccount.Amount" />
+                        @if (ShowAmountError)
+                        {
+                            <div class="text-danger">Please enter a valid amount greater than $0.</div>
+                        }
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" @onclick="AddAccount">Save changes</button>
+                    <button type="button" class="btn btn-danger" @onclick="HideModal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+<!-- Toast -->
+@* <div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div id="customToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" data-autohide="true">
+        <div id="toastHeader" class="toast-header">
+            <strong class="me-auto" id="toastTitle">Info</strong>
+            <button type="button" class="ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" id="toastMessage">Placeholder</div>
+        <div class="progress" style="height: 4px;">
+            <div id="toastProgress" class="progress-bar" role="progressbar" style="width: 100%; transition: width 3s linear;"></div>
+        </div>
+    </div>
+</div> *@
+
+<!-- Toast -->
+<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div id="customToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" data-autohide="true">
+        <div id="toastHeader" class="toast-header d-flex justify-content-between w-100">
+            <strong id="toastTitle">Info</strong>
+            <button type="button" class="close ms-auto" data-bs-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" id="toastMessage">Placeholder</div>
+        <div class="progress" style="height: 4px;">
+            <div id="toastProgress" class="progress-bar" role="progressbar" style="width: 100%; transition: width 3s linear;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    window.initializeDataTable = () => {
+        $(document).ready(function () {
+            if ($.fn.dataTable.isDataTable('#accountsTable')) {
+                $('#accountsTable').DataTable().destroy();
+            }
+            $('#accountsTable').DataTable();
+        });
+    };
+
+    window.showToast = (message, type = 'success') => {
+        const header = $('#toastHeader');
+        const title = $('#toastTitle');
+        const progress = $('#toastProgress');
+
+        header.removeClass('bg-success bg-danger text-white');
+        progress.removeClass('bg-success bg-danger');
+
+        if (type === 'success') {
+            header.addClass('bg-success text-white');
+            title.text('Success');
+            // progress.addClass('bg-light');
+        } else {
+            header.addClass('bg-danger text-white');
+            title.text('Error');
+            // progress.addClass('bg-light');
+        }
+
+        $('#toastMessage').text(message);
+
+        // Reset progress instantly and force reflow
+        progress.css({ width: '100%', transition: 'none' });
+        progress[0].offsetWidth; // ✅ Force browser reflow
+
+        // Animate progress
+        progress.css({ transition: 'width 3s linear', width: '0%' });
+
+        // Show toast
+        $('#customToast').toast('show');
+    };
+</script>
+
+
+
+@code {
+    private bool ShowAccountModal = false;
+    private bool IsLoading = false;
+    private List<Common.Models.Response.AccountCategoriesResponse> AccountTypes = new();
+    private List<AccountModel> Accounts = new();
+    private AccountFormModel NewAccount = new();
+    private string UserToken;
+    private string ContactId;
+
+    private bool ShowAccountTypeError = false;
+    private bool ShowAccountNameError = false;
+    private bool ShowAmountError = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        UserToken = await LocalStorage.GetItemAsync<string>("auth_token");
+        ContactId = await LocalStorage.GetItemAsync<string>("user_contactId") ?? string.Empty;
+        await LoadAccountTypes();
+        await LoadCustomerAccounts();
+    }
+
+    private async Task LoadAccountTypes()
+    {
+        try
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://acceinfoapi-cga0hmcdazb5hjbs.eastus2-01.azurewebsites.net/api/accounts/master");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserToken);
+
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var baseResponse = JsonSerializer.Deserialize<Common.Models.BaseResponseModel>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                if (baseResponse?.Data != null)
+                {
+                    var rawData = JsonSerializer.Serialize(baseResponse.Data);
+                    AccountTypes = JsonSerializer.Deserialize<List<Common.Models.Response.AccountCategoriesResponse>>(rawData, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error loading account types: " + ex.Message);
+        }
+    }
+
+    private async Task LoadCustomerAccounts()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        try
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, $"https://acceinfoapi-cga0hmcdazb5hjbs.eastus2-01.azurewebsites.net/api/accounts/cust-account?ContactId={ContactId}");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserToken);
+
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var baseResponse = JsonSerializer.Deserialize<Common.Models.BaseResponseModel>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                if (baseResponse?.Data != null)
+                {
+                    var rawData = JsonSerializer.Serialize(baseResponse.Data);
+                    Accounts = JsonSerializer.Deserialize<List<AccountModel>>(rawData, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                }
+            }
+            await JS.InvokeVoidAsync("initializeDataTable");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error loading accounts: " + ex.Message);
+        }
+        finally
+        {
+            IsLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task AddAccount()
+    {
+        ShowAccountTypeError = string.IsNullOrWhiteSpace(NewAccount.AccountCategoryId);
+        ShowAccountNameError = string.IsNullOrWhiteSpace(NewAccount.AccountName);
+        ShowAmountError = string.IsNullOrWhiteSpace(NewAccount.Amount) || !decimal.TryParse(NewAccount.Amount, out _);
+
+        if (ShowAccountTypeError || ShowAccountNameError || ShowAmountError)
+            return;
+
+        IsLoading = true;
+        StateHasChanged();
+
+        try
+        {
+            var payload = new
+            {
+                contactId = ContactId,
+                accountName = NewAccount.AccountName,
+                accountType = NewAccount.AccountCategoryId,
+                amount = decimal.TryParse(NewAccount.Amount, out var amt) ? amt : 0
+            };
+
+            var content = new StringContent(JsonSerializer.Serialize(payload), System.Text.Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, "https://acceinfoapi-cga0hmcdazb5hjbs.eastus2-01.azurewebsites.net/api/accounts/add")
+                {
+                    Content = content
+                };
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", UserToken);
+
+            var response = await Http.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                HideModal();
+                NewAccount = new();
+
+                await LoadCustomerAccounts();
+                await JS.InvokeVoidAsync("showToast", "Account created successfully.", "success");
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("showToast", "Failed to create account.", "error");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("AddAccount Error: " + ex.Message);
+            await JS.InvokeVoidAsync("showToast", "Error occurred while adding account.", "error");
+        }
+
+        IsLoading = false;
+        StateHasChanged();
+    }
+
+    private void ShowModal() => ShowAccountModal = true;
+    private void HideModal() => ShowAccountModal = false;
+
+    public class AccountModel
+    {
+        public string AccountId { get; set; }
+        public string AccountNumber { get; set; }
+        public string AccountCategoryName { get; set; }
+        public string AccountCategoryId { get; set; }
+        public string AccountName { get; set; }
+        public decimal Balance { get; set; }
+    }
+
+    public class AccountFormModel
+    {
+        public string AccountCategoryId { get; set; }
+        public string AccountName { get; set; }
+        public string Amount { get; set; }
+    }
+}

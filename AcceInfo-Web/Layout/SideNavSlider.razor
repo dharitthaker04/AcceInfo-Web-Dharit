@@ -1,4 +1,13 @@
 ﻿@inject NavigationManager NavigationManager
+@using Blazored.LocalStorage
+@using System.Text.Json
+@using Microsoft.Extensions.Localization
+@layout MainLayout
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Http
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject IJSRuntime JS
+@inject IStringLocalizer<AcceInfo_Web.Pages.Index> Localizer
 
 <div class="col-lg-3 left-side-nav-slider">
     <div class="card card-dt">
@@ -6,27 +15,27 @@
             @* <button class="close-menu-button" onclick="toggleMenu()"></button> *@
 
             <div class="nav flex-column nav-pills" id="profile-tab" aria-orientation="vertical">
-                <h5 class="my-4">Pay, Send & Receive Money</h5>
+                <h5 class="my-4"> @(Localizer["PaySendReceiveMoney"].ResourceNotFound ? "Missing" : Localizer["PaySendReceiveMoney"])</h5>
 
-                <a class="nav-link highlight-files @GetActiveClass("/pay-bill")" href="/pay-bill">Pay a Bill</a>
-                <a class="nav-link highlight-files @GetActiveClass("/pay-multi-bills")" href="/pay-multi-bills">Pay Multiple Bills</a>
-                <a class="nav-link highlight-files @GetActiveClass("/transfer-funds")" href="/transfer-funds">Transfer Money</a>
+                <a class="nav-link highlight-files @GetActiveClass("/pay-bill")" href="/pay-bill"> @(Localizer["PayABill"].ResourceNotFound ? "Missing" : Localizer["PayABill"])</a>
+                <a class="nav-link highlight-files @GetActiveClass("/pay-multi-bills")" href="/pay-multi-bills">@(Localizer["PayMultipleBills"].ResourceNotFound ? "Missing" : Localizer["PayMultipleBills"])</a>
+                <a class="nav-link highlight-files @GetActiveClass("/transfer-funds")" href="/transfer-funds">@(Localizer["TransferMoney"].ResourceNotFound ? "Missing" : Localizer["TransferMoney"])</a>
                
-                <a class="nav-link @GetActiveClass("/send-e-transfer")" href="/send-e-transfer"><em>Send an Interac e-Transfer</em></a>
+                <a class="nav-link @GetActiveClass("/send-e-transfer")" href="/send-e-transfer"><em>@(Localizer["PayABill"].ResourceNotFound ? "Missing" : Localizer["PayABill"])</em></a>
 
-                <a class="nav-link @GetActiveClass("/send-money")" href="/send-money">Send money</a>
+                <a class="nav-link @GetActiveClass("/send-money")" href="/send-money">@(Localizer["SendMoney"].ResourceNotFound ? "Missing" : Localizer["SendMoney"])</a>
                 @* <a class="nav-link @GetActiveClass("/send-international")" href="/send-international">Send International Money Transfer</a> *@
                 @* <a class="nav-link @GetActiveClass("/receive-wire-transfer")" href="/receive-wire-transfer">Receive a Wire Transfer</a> *@
 
                
-                <a class="nav-link @GetActiveClass("/request-money")" href="/request-money">Request Money</a>
+                <a class="nav-link @GetActiveClass("/request-money")" href="/request-money">@(Localizer["RequestMoney"].ResourceNotFound ? "Missing" : Localizer["RequestMoney"])</a>
 
                 @* <a class="nav-link @GetActiveClass("/autodeposit")" href="/autodeposit">Register for <em>Interac</em> e-Transfer AutoDeposit</a> *@
                 @* <a class="nav-link @GetActiveClass("/transfer-to-us")" href="/transfer-to-us">Transfer Funds to ACCE US Banking</a> *@
                 @* <a class="nav-link @GetActiveClass("/transfer-to-investing")" href="/transfer-to-investing">Transfer to Direct Investing or InvestEase</a> *@
 
-                <h5 class="my-4">Manage Payments & Transfers</h5>
-                <a class="nav-link highlight-files @GetActiveClass("/transaction-history")" href="/transaction-history">Transaction History</a>
+                <h5 class="my-4">@(Localizer["ManagePaymentsTransfers"].ResourceNotFound ? "Missing" : Localizer["ManagePaymentsTransfers"])</h5>
+                <a class="nav-link highlight-files @GetActiveClass("/transaction-history")" href="/transaction-history">@(Localizer["TransactionHistory"].ResourceNotFound ? "Missing" : Localizer["TransactionHistory"])</a>
                 @* <a class="nav-link @GetActiveClass("/manage-postdated-transactions")" href="/manage-postdated-transactions">Manage Postdated Transactions</a>
                 <a class="nav-link @GetActiveClass("/cancel-bill-payment")" href="/cancel-bill-payment">Cancel Bill Payment</a>
                 <a class="nav-link @GetActiveClass("/cancel-e-transfer")" href="/cancel-e-transfer"><em>Cancel Interac e-Transfer</em></a> *@
@@ -38,11 +47,11 @@
                 <a class="nav-link @GetActiveClass("/add-international-recipient")" href="/add-international-recipient">Add International Money Transfer Recipient</a>
                 <a class="nav-link @GetActiveClass("/add-other-customer")" href="/add-other-customer">Add Other ACCE Bank Customer</a> *@
 
-                <h5 class="my-4">Manage Payees & Recipients</h5>
-                <a class="nav-link highlight-files @GetActiveClass("/manage-payees")" href="/manage-payees">Manage Payees</a>
+                <h5 class="my-4">@(Localizer["ManagePayeesRecipients"].ResourceNotFound ? "Missing" : Localizer["ManagePayeesRecipients"])</h5>
+                <a class="nav-link highlight-files @GetActiveClass("/manage-payees")" href="/manage-payees">@(Localizer["ManagePayees"].ResourceNotFound ? "Missing" : Localizer["ManagePayees"])</a>
                 @* <a class="nav-link @GetActiveClass("/manage-intl-recipients")" href="/manage-intl-recipients">Manage International Money Transfer Recipients</a> *@
-                <a class="nav-link highlight-files @GetActiveClass("/manage-contact")" href="/manage-contact">Manage Contact</a>
-                <a class="nav-link highlight-files @GetActiveClass("/manage-accounts")" href="/manage-accounts">Manage Accounts</a>
+                <a class="nav-link highlight-files @GetActiveClass("/manage-contact")" href="/manage-contact">@(Localizer["ManageContact"].ResourceNotFound ? "Missing" : Localizer["ManageContact"])</a>
+                <a class="nav-link highlight-files @GetActiveClass("/manage-accounts")" href="/manage-accounts">@(Localizer["ManageAccounts"].ResourceNotFound ? "Missing" : Localizer["ManageAccounts"])</a>
                 @* <a class="nav-link @GetActiveClass("/sort-payee-list")" href="/sort-payee-list">Sort Payee List</a>
                 <a class="nav-link @GetActiveClass("/nickname-payees")" href="/nickname-payees">Nickname Payees</a> *@
             </div>

@@ -1,0 +1,413 @@
+﻿@page "/manage-contact"
+@layout MainLayout
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+
+@using System.ComponentModel.DataAnnotations
+@using System.Text.Json
+@using System.Text
+
+
+@* @if (IsLoading)
+{
+    <div class="spinner-overlay">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+} *@
+
+<div class="row">
+    <SideNavSlider />
+
+    <div class="col-lg-9">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        @if (IsLoading)
+                        {
+                            <div class="spinner-overlay">
+                                <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
+                        }
+
+                        <div class="float-left align-item-center mt-2">
+                            <h3 class="text-primary"><u>Manage Contact</u></h3>
+                        </div>
+                        <div class="float-right align-item-center mt-2">
+                            <button class="btn btn-primary px-4" @onclick="ShowAddModal">ADD</button>
+                        </div>
+
+                        <table class="table mb-0 mt-3" id="contactTable">
+                            <thead>
+                                <tr>
+                                    @* <th>ID</th> *@
+                                    <th>Name</th>
+                                    <th>Nick Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Email</th>
+                                    <th>Send Transfers by</th>
+                                    <th>Preferred Language</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var contact in Contacts)
+                                {
+                                    <tr>
+                                        @* <td>@contact.Id</td> *@
+                                        <td>@contact.Name</td>
+                                        <td>@contact.NickName</td>
+                                        <td>@contact.MobileNumber</td>
+                                        <td>@contact.Email</td>
+                                        <td>@GetTransferMethodText(contact)</td>
+                                        <td>@contact.PreferredLanguage</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ShowModal)
+{
+        <div class="modal show d-block" tabindex="-1" role="dialog" style="overflow-y: auto;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Contact</h5>
+                    <button type="button" class="close" @onclick="CloseModal"><span>&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                            <label>Name <small class="text-danger font-13">*</small></label>
+                        <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Name) ? "is-invalid" : "")"
+                               @bind="NewContact.Name" />
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Name))
+                        {
+                            <div class="text-danger mt-1">Please enter the contact's name.</div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nick Name</label>
+                        <input class="form-control" @bind="NewContact.NickName" />
+                    </div>
+
+                    <div class="form-group">
+                            <label>Phone Number <small class="text-danger font-13">*</small></label>
+                        <div class="input-group">
+                            <select class="form-control" style="max-width: 100px;" @bind="NewContact.CountryCode">
+                                <option value="+1">+1</option>
+                                <option value="+44">+44</option>
+                                <option value="+91">+91</option>
+                            </select>
+                            <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.PhoneNumber) ? "is-invalid" : "")"
+                                   @bind="NewContact.PhoneNumber" />
+                        </div>
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.PhoneNumber))
+                        {
+                            <div class="text-danger mt-1">Please enter a valid phone number. (10 digit validation)</div>
+                        }
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control @(SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Email) ? "is-invalid" : "")"
+                               type="email" @bind="NewContact.Email" />
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.Email))
+                        {
+                            <div class="text-danger mt-1">Please enter a valid email address.</div>
+                        }
+                    </div>
+
+                    <div class="form-group required">
+                            <label>Send transfers by <small class="text-danger font-13">*</small></label>
+                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.TransferByEmail ? "active" : "")"
+                                   @onclick="@(() => NewContact.TransferByEmail = !NewContact.TransferByEmail)">
+                                <input type="checkbox" class="d-none" /> Email
+                            </label>
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.TransferByPhone ? "active" : "")"
+                                   @onclick="@(() => NewContact.TransferByPhone = !NewContact.TransferByPhone)">
+                                <input type="checkbox" class="d-none" /> Mobile phone
+                            </label>
+                        </div>
+                        @if (SubmitAttempted && !NewContact.TransferByEmail && !NewContact.TransferByPhone)
+                        {
+                            <div class="text-danger mt-1">Please select at least one transfer method.</div>
+                        }
+                    </div>
+
+                    <div class="form-group required">
+                            <label>Contact’s preferred language <small class="text-danger font-13">*</small></label>
+                        <div class="btn-group btn-group-toggle d-flex" data-toggle="buttons">
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.PreferredLanguage == "English" ? "active" : "")">
+                                <input type="radio" value="English" class="d-none" @onchange="@(() => NewContact.PreferredLanguage = "English")" /> English
+                            </label>
+                            <label class="btn btn-outline-secondary flex-fill @(NewContact.PreferredLanguage == "French" ? "active" : "")">
+                                <input type="radio" value="French" class="d-none" @onchange="@(() => NewContact.PreferredLanguage = "French")" /> French
+                            </label>
+                        </div>
+                        @if (SubmitAttempted && string.IsNullOrWhiteSpace(NewContact.PreferredLanguage))
+                        {
+                            <div class="text-danger mt-1">Please select a preferred language.</div>
+                        }
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary" @onclick="AddContactAsync">Save Contact</button>
+                        <button class="btn btn-danger" @onclick="CloseModal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+<!-- Toast -->
+<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;">
+    <div id="customToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" data-autohide="true">
+        <div id="toastHeader" class="toast-header d-flex justify-content-between w-100">
+            <strong id="toastTitle">Info</strong>
+            <button type="button" class="close ms-auto" data-bs-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="toast-body" id="toastMessage">Placeholder</div>
+        <div class="progress" style="height: 4px;">
+            <div id="toastProgress" class="progress-bar" role="progressbar" style="width: 100%; transition: width 3s linear;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<link href="/assets/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    window.initializeDataTable = () => {
+        $(document).ready(function () {
+            if ($.fn.dataTable.isDataTable('#contactTable')) {
+                $('#contactTable').DataTable().destroy();
+            }
+            $('#contactTable').DataTable();
+        });
+    };
+
+    window.showToast = (message, type = 'success') => {
+        const header = $('#toastHeader');
+        const title = $('#toastTitle');
+        const progress = $('#toastProgress');
+
+        header.removeClass('bg-success bg-danger text-white');
+        progress.removeClass('bg-success bg-danger');
+
+        if (type === 'success') {
+            header.addClass('bg-success text-white');
+            title.text('Success');
+            // progress.addClass('bg-light');
+        } else {
+            header.addClass('bg-danger text-white');
+            title.text('Error');
+            // progress.addClass('bg-light');
+        }
+
+        $('#toastMessage').text(message);
+
+        // Reset progress instantly and force reflow
+        progress.css({ width: '100%', transition: 'none' });
+        progress[0].offsetWidth; // ✅ Force browser reflow
+
+        // Animate progress
+        progress.css({ transition: 'width 3s linear', width: '0%' });
+
+        // Show toast
+        $('#customToast').toast('show');
+    };
+</script>
+
+@code {
+    private bool IsLoading = false;
+    private bool ShowModal = false;
+    private List<ContactModel> Contacts = new();
+    private ContactFormModel NewContact = new();
+    private string AuthToken;
+    private bool SubmitAttempted = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        AuthToken = await LocalStorage.GetItemAsync<string>("auth_token") ?? string.Empty;
+        IsLoading = true;
+        StateHasChanged();
+        await LoadContacts();
+    }
+
+    private string GetTransferMethodText(ContactModel contact)
+    {
+        var methods = new List<string>();
+        if (contact.IstransferByEmail) methods.Add("Email");
+        if (contact.IstransferByMobile) methods.Add("Mobile phone");
+        return string.Join(", ", methods);
+    }
+
+    private void ShowAddModal() => ShowModal = true;
+    private void CloseModal()
+    {
+        NewContact = new ContactFormModel(); // Reset form
+        SubmitAttempted = false;
+        ShowModal = false;
+    }
+
+    private async Task AddContactAsync()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        SubmitAttempted = true;
+
+        if (string.IsNullOrWhiteSpace(NewContact.Name) ||
+            string.IsNullOrWhiteSpace(NewContact.PhoneNumber) ||
+            string.IsNullOrWhiteSpace(NewContact.Email) ||
+            string.IsNullOrWhiteSpace(NewContact.PreferredLanguage) ||
+            (!NewContact.TransferByEmail && !NewContact.TransferByPhone))
+        {
+            IsLoading = false;
+            StateHasChanged();
+            return;
+        }
+
+        var payload = new
+        {
+            Name = NewContact.Name,
+            Email = NewContact.Email,
+            ContactNumber = NewContact.CountryCode + NewContact.PhoneNumber,
+            IstransferByEmail = NewContact.TransferByEmail,
+            IstransferByMobile = NewContact.TransferByPhone,
+            PrefLanguage = NewContact.PreferredLanguage,
+            NickName = NewContact.NickName
+        };
+
+        var json = JsonSerializer.Serialize(payload);
+        var content = new StringContent(json, Encoding.UTF8, "application/json");
+        var request = new HttpRequestMessage(HttpMethod.Post, "https://acceinfoapi-cga0hmcdazb5hjbs.eastus2-01.azurewebsites.net/api/member/add")
+            {
+                Content = content
+            };
+        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
+
+        try
+        {
+            var response = await Http.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var result = JsonSerializer.Deserialize<ApiResponse<object>>(responseContent, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+            if (response.IsSuccessStatusCode && result != null && result.Status == "Success")
+            {
+                await JS.InvokeVoidAsync("showToast", result.Message ?? "Contact added successfully!", "success");
+                CloseModal();
+                await LoadContacts();
+            }
+            else
+            {
+                var errorMessage = result?.Message ?? "Failed to add contact.";
+                await JS.InvokeVoidAsync("showToast", errorMessage, "error");
+            }
+        }
+        catch (Exception ex)
+        {
+            await JS.InvokeVoidAsync("showToast", $"Unexpected error: {ex.Message}", "error");
+        }
+        finally
+        {
+            IsLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    private async Task LoadContacts()
+    {
+        IsLoading = true;
+        StateHasChanged();
+        try
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "https://acceinfoapi-cga0hmcdazb5hjbs.eastus2-01.azurewebsites.net/api/member/get-list");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", AuthToken);
+            var response = await Http.SendAsync(request);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var json = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<ApiResponse<List<ContactModel>>>(json, new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+
+                if (result != null && result.Status == "Success" && result.Data != null)
+                {
+                    Contacts = result.Data;
+                }
+
+                await JS.InvokeVoidAsync("initializeDataTable");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error loading contacts: " + ex.Message);
+        }
+        finally
+        {
+            IsLoading = false;
+            StateHasChanged();
+        }
+    }
+
+    public class ApiResponse<T>
+    {
+        public string Status { get; set; }
+        public T Data { get; set; }
+        public string Message { get; set; }
+        public int StatusCode { get; set; }
+    }
+
+    public class ContactModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string NickName { get; set; }
+        public string MobileNumber { get; set; }
+        public string PreferredLanguage { get; set; }
+        public bool IstransferByEmail { get; set; }
+        public bool IstransferByMobile { get; set; }
+    }
+
+    public class ContactFormModel
+    {
+        [Required] public string Name { get; set; }
+        public string NickName { get; set; }
+        public string MobileNumber { get; set; }
+        [Required] public string CountryCode { get; set; } = "+1";
+        [Required] public string PhoneNumber { get; set; }
+        [Required] public string Email { get; set; }
+        public bool TransferByEmail { get; set; }
+        public bool TransferByPhone { get; set; }
+        public string PreferredLanguage { get; set; } = "English";
+    }
+}
