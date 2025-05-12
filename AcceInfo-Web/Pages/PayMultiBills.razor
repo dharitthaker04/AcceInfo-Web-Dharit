@@ -6,6 +6,14 @@
 @inject IJSRuntime JS
 @inject Blazored.LocalStorage.ILocalStorageService LocalStorage
 
+@inject IStringLocalizer<SharedResource> Localizer
+
+@using Blazored.LocalStorage
+@using System.Text.Json
+@using Microsoft.Extensions.Localization
+@inject ILocalStorageService LocalStorage
+@inject IStringLocalizer<AcceInfo_Web.Pages.Index> Localizer
+
 @using System.Text.Json
 @using System.Net.Http.Headers
 @using System.Text
@@ -30,7 +38,9 @@
                     <div class="col-md-12">
                         <div class="ribbon-1">
                             <div class="ribbon-box">
-                                <h3><div class="ribbon ribbon-mark bg-primary">Pay Multiple Bills</div></h3>
+                                <h3>
+                                    <div class="ribbon ribbon-mark bg-primary">@Localizer["PayMultipleBills"]</div>
+                                </h3>
 
                                 <div class="row">
                                     <div class="col-md-12">
@@ -46,34 +56,34 @@
                                                                     <h5 class="mb-0"><i class="fas fa-receipt"></i> Payment Receipt</h5>
                                                                 </div>
                                                                 <div class="card-body">
-                                                                     <div class="text-center text-success">
+                                                                    <div class="text-center text-success">
                                                                         <i class="fas fa-check-circle fa-2x mb-2"></i>
-                                                                        <h5 class="font-weight-bold">Pay a Bill Successful!</h5>
+                                                                        <h5 class="font-weight-bold">@Localizer["PayBillSuccess"]</h5>                                                                        
                                                                         <p>@DateTime.Now.ToString("MMM dd, yyyy 'at' h:mm tt") ET</p>
                                                                     </div>
                                                                     @* <p class="text-success">Your bills have been paid successfully. Below is a summary of the transaction.</p> *@
 
                                                                     <dl class="row">
-                                                                        <dt class="col-sm-4">From Account:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["FromAccount"]</dt>
                                                                         <dd class="col-sm-8">
                                                                             @Accounts.FirstOrDefault(a => a.AccountId == SelectedTransferFrom)?.AccountName
                                                                             (@GetAccountNumberById(SelectedTransferFrom))
                                                                         </dd>
 
-                                                                        <dt class="col-sm-4">Payment Date:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["PaymentDate"]</dt>
                                                                         <dd class="col-sm-8">@DateTime.UtcNow.ToString("MMMM dd, yyyy")</dd>
                                                                     </dl>
 
                                                                     <hr />
 
-                                                                    <h6>Paid To:</h6>
+                                                                    <h6>@Localizer["PaidTo"]</h6>
                                                                     <table class="table table-striped table-sm">
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>#</th>
-                                                                                <th>Transaction Number</th> <!-- ✅ Add this new column -->
-                                                                                <th>Payee</th>
-                                                                                <th>Amount</th>
+                                                                                <th>@Localizer["TransactionNumber"]</th>
+                                                                                <th>@Localizer["Payee"]</th>
+                                                                                <th>@Localizer["Amount"]</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -96,9 +106,7 @@
                                                                     <div class="text-right mt-3">
                                                                         <div class="row justify-content-end">
                                                                             <div class="col-md-3">
-                                                                                <button class="btn btn-outline-primary w-100" @onclick="@(() => NavigationManager.NavigateTo(NavigationManager.Uri, forceLoad: true))">
-                                                                                    <i class="fas fa-check-circle"></i> Done
-                                                                                </button>
+                                                                                <button class="btn btn-outline-primary w-100"> <i class="fas fa-check-circle"></i> @Localizer["Done"] </button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -111,24 +119,25 @@
                                                 {
                                                     <div class="row">
                                                         <div class="col-md-9">
-                                                            <p>Paying several bills at once is easy. Just select a payee and enter an amount for each bill.</p>
-                                                            <p>If you're paying someone new, don't forget to add new payees to your list first.</p>
-                                                            <p>Remember that your bills will be paid in the order you enter them below. If your account runs out of funds to pay for a bill in your list, all items following it won't be processed either. So make sure to put the most important ones first.</p>
+                                                            <p>@Localizer["PayMultiInstruction1"]</p>
+                                                            <p>@Localizer["PayMultiInstruction2"]</p>
+                                                            <p>@(Localizer["PayMultiInstruction3"].ResourceNotFound ? "Missing" : Localizer["PayMultiInstruction3"])</p>
                                                         </div>
+
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md-6">
-                                                            <button type="button" class="btn btn-outline-primary waves-effect waves-light mb-2 " @onclick="ShowAddModal">+ Add payee</button>
+                                                            <button type="button" class="btn btn-outline-primary waves-effect waves-light mb-2 " @onclick="ShowAddModal">@Localizer["AddBillPayee"]</button>
 
                                                         </div>
                                                         <div class="col-md-6">
                                                             <button type="button" class="btn btn-outline-primary waves-effect waves-light mb-2 float-right" @onclick="AddPayeeRow">
-                                                                <i class="mdi mdi-account-multiple-plus mr-2"></i>Add bill payee
+                                                                <i class="mdi mdi-account-multiple-plus mr-2"></i>@Localizer["AddBillPayee"]
                                                             </button>
                                                         </div>
                                                     </div>
 
-                                                    <br/>
+                                                    <br />
                                                     <div class="row">
                                                         <div class="col-md-12 align-self-center">
                                                             <EditForm Model="@this" OnValidSubmit="ValidateAndContinue">
@@ -139,10 +148,10 @@
                                                                                 <div class="form-group">
                                                                                     <div class="input-group">
                                                                                         <div class="input-group-prepend">
-                                                                                            <span class="input-group-text">From:</span>
+                                                                                            <span class="input-group-text">@Localizer["From"]</span>
                                                                                         </div>
                                                                                         <select class="form-control" @bind="SelectedTransferFrom">
-                                                                                            <option value="">Select</option>
+                                                                                            <option value="">@Localizer["Select"]</option>
                                                                                             @foreach (var account in Accounts)
                                                                                             {
                                                                                                 <option value="@account.AccountId">@account.AccountName - @account.AccountCategoryName - @account.AccountNumber = @account.Balance.ToString("C")</option>
@@ -164,7 +173,7 @@
                                                                                                 <span class="input-group-text">To:</span>
                                                                                             </div>
                                                                                             <select class="form-control" @bind="item.PayeeId">
-                                                                                                <option value="">Select payee</option>
+                                                                                                <option value="">@Localizer["SelectPayee"]</option>
                                                                                                 @foreach (var payee in PayeeList)
                                                                                                 {
                                                                                                     <option value="@payee.PayeeId">@payee.PayeeName - @payee?.PayeeTypeName - @payee.PayeeNumber</option>
@@ -179,11 +188,11 @@
                                                                                             <div class="input-group-prepend">
                                                                                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                                                                             </div>
-                                                                                            <input type="text" class="form-control" placeholder="Enter Amount" @bind="item.Amount">
+                                                                                            <input type="text" class="form-control" placeholder="@Localizer["EnterAmount"]" @bind="item.Amount">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                @if (index >= 2) 
+                                                                                @if (index >= 2)
                                                                                 {
                                                                                     <div class="col-md-1">
                                                                                         <button type="button" class="btn btn-danger btn-sm float-right" @onclick="() => RemovePayeeRow(index)">
@@ -197,7 +206,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="btn-toolbar sw-toolbar sw-toolbar-bottom justify-content-end">
-                                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-pd-left-right">Continue</button>
+                                                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-pd-left-right">@Localizer["Continue"]</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -213,16 +222,17 @@
                                                 {
                                                     <div class="row">
                                                         <div class="col-md-9">
-                                                            <p>Paying several bills at once is easy. Just select a payee and enter an amount for each bill.</p>
-                                                            <p>If you're paying someone new, don't forget to add new payees to your list first.</p>
-                                                            <p>Remember that your bills will be paid in the order you enter them below. If your account runs out of funds to pay for a bill in your list, all items following it won't be processed either. So make sure to put the most important ones first.</p>
+                                                            <p>@Localizer["PayMultiInstruction1"]</p>
+                                                            <p>@Localizer["PayMultiInstruction2"]</p>
+                                                            <p>@Localizer["PayMultiInstruction3"]</p>
                                                         </div>
+
                                                     </div>
                                                     <div class="row mt-4">
                                                         <div class="col-md-12">
                                                             <div class="card border border-primary">
                                                                 <div class="card-header bg-primary text-white">
-                                                                    <h5 class="mb-0"> <i class="fas fa-receipt"></i> Confirm Bill Payment</h5>
+                                                                    <h5 class="mb-0"><i class="fas fa-receipt"></i> @Localizer["ConfirmBillPayment"]</h5>
                                                                 </div>
                                                                 <div class="card-body">
                                                                     <p><strong>From Account:</strong> @Accounts.FirstOrDefault(a => a.AccountId == SelectedTransferFrom)?.AccountName (@GetAccountNumberById(SelectedTransferFrom))</p>
@@ -230,8 +240,8 @@
                                                                         <thead>
                                                                             <tr>
                                                                                 <th>#</th>
-                                                                                <th>Payee To</th>
-                                                                                <th>Amount</th>
+                                                                                <th>@Localizer["Payee"]</th>
+                                                                                <th>@Localizer["Amount"]</th>
                                                                             </tr>
                                                                         </thead>
                                                                         <tbody>
@@ -250,10 +260,10 @@
                                                                     <div class="text-right mt-3">
                                                                         <div class="row justify-content-end">
                                                                             <div class="col-md-3">
-                                                                                <button class="btn btn-outline-primary w-100" @onclick="() => ShowConfirmation = false">Back</button>
+                                                                                <button class="btn btn-outline-primary w-100" @onclick="() => ShowConfirmation = false">@Localizer["Back"]</button>
                                                                             </div>
                                                                             <div class="col-md-3">
-                                                                                <button class="btn btn-primary w-100" @onclick="SubmitPayMultiBill">Confirm & Pay</button>
+                                                                                <button class="btn btn-primary w-100" @onclick="SubmitPayMultiBill">@Localizer["ConfirmAndPay"]</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -266,10 +276,10 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="alert alert-outline-primary mb-0" role="alert">
-                                                            <h4 class="alert-heading font-18"><i class="fas fa-comments"></i> When are my transactions processed?</h4>
-                                                            <p>Transactions you make on business days before 6:00 pm will be processed by us the same day.</p>
-                                                            <p>Transactions made at all other times will be processed by us the next business day.</p>
-                                                            <p>Payments to third parties (such as utility bills and non-RBC credit cards) often need more processing time by the third party -- which generally takes up to 3 days.</p>
+                                                            <h4 class="alert-heading font-18"><i class="fas fa-comments"></i> @Localizer["TransactionProcessingTitle"]</h4>
+                                                            <p>@Localizer["TransactionsSameDay"]</p>
+                                                            <p>@Localizer["TransactionsNextDay"]</p>
+                                                            <p>@Localizer["TransactionsThirdParty"]</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -281,7 +291,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -295,21 +305,21 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content form-horizontal">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editor-title">Add Payee</h5>
+                    <h5 class="modal-title">@Localizer["AddPayee"]</h5>
                     <button type="button" class="close" @onclick="CloseModal"><span>&times;</span></button>
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-12 mb-3">
-                        <label>Payee Name <small class="text-danger font-13">*</small></label>
+                        <label>@Localizer["PayeeName"] <small class="text-danger font-13">*</small></label>
                         <input type="text" class="form-control" @bind="newPayee.PayeeName" @oninput="(e) => ShowPayeeNameError = string.IsNullOrWhiteSpace(e.Value?.ToString())" />
                         @if (ShowPayeeNameError)
                         {
-                            <div class="text-danger">Payee Name is required.</div>
+                            <div class="text-danger">@Localizer["PayeeNameRequired"]</div>
                         }
                     </div>
 
                     <div class="col-sm-12 mb-3">
-                        <label>Payee Type <small class="text-danger font-13">*</small></label>
+                        <label>@Localizer["PayeeType"] <small class="text-danger font-13">*</small></label>
                         <select class="form-control" @bind="PayeeTypeProxy" @bind:event="onchange">
                             <option value="">-- Select --</option>
                             @foreach (var category in payeeCategories)
@@ -319,22 +329,22 @@
                         </select>
                         @if (ShowPayeeTypeError)
                         {
-                            <div class="text-danger">Payee Type is required.</div>
+                            <div class="text-danger">@Localizer["PayeeTypeRequired"]</div>
                         }
                     </div>
 
                     <div class="col-sm-12 mb-3">
-                        <label>Account Number <small class="text-danger font-13">*</small></label>
+                        <label>@Localizer["AccountNumber"] <small class="text-danger font-13">*</small></label>
                         <input type="text" class="form-control" @bind="newPayee.PayeeNumber" @oninput="(e) => ShowPayeeNumberError = string.IsNullOrWhiteSpace(e.Value?.ToString())" />
                         @if (ShowPayeeNumberError)
                         {
-                            <div class="text-danger">Account Number is required.</div>
+                            <div class="text-danger">@Localizer["AccountNumberRequired"]</div>
                         }
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" @onclick="HandlePayeeSubmit">Save</button>
-                    <button type="button" class="btn btn-danger" @onclick="CloseModal">Cancel</button>
+                    <button class="btn btn-primary" @onclick="HandlePayeeSubmit">@Localizer["Save"]</button>
+                    <button type="button" class="btn btn-danger" @onclick="CloseModal">@Localizer["Cancel"]</button>
                 </div>
             </div>
         </div>
@@ -731,7 +741,7 @@
     private async Task HandlePayeeSubmit()
     {
 
-       
+
 
         ShowPayeeNameError = string.IsNullOrWhiteSpace(newPayee.PayeeName);
         ShowPayeeTypeError = string.IsNullOrWhiteSpace(newPayee.PayeeType);
@@ -739,7 +749,7 @@
 
         if (ShowPayeeNameError || ShowPayeeTypeError || ShowPayeeNumberError)
             return;
-        
+
         IsLoading = true;
         StateHasChanged();
 

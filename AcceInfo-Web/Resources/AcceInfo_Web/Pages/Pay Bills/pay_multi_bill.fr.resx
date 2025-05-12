@@ -118,320 +118,394 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ACCERewards" xml:space="preserve">
-    <value>ACCE Rewards</value>
+    <value>Récompenses ACCE</value>
   </data>
   <data name="ApplyforCreditCard" xml:space="preserve">
-    <value>Apply for a Credit Card</value>
+    <value>Demander une carte de crédit</value>
   </data>
   <data name="BankAccountsSummary" xml:space="preserve">
-    <value>Bank Accounts Summary</value>
+    <value>Sommaire du compte bancaire</value>
   </data>
   <data name="CreditCards" xml:space="preserve">
-    <value>CreditCards</value>
+    <value>Cartes de crédit</value>
   </data>
   <data name="CreditCardSummary" xml:space="preserve">
-    <value>Credit Card Summary</value>
+    <value>Résumé de la carte de crédit</value>
   </data>
   <data name="GoodMorningText" xml:space="preserve">
-    <value>Good Morning</value>
+    <value>Bonjour</value>
   </data>
   <data name="OpenNewAccount" xml:space="preserve">
-    <value>Open New Account</value>
+    <value>Ouvrir un nouveau compte</value>
   </data>
   <data name="ViewOffer" xml:space="preserve">
-    <value>View Offer</value>
+    <value>Voir l'offre</value>
   </data>
   <data name="WelcomeText" xml:space="preserve">
-    <value>Welcome</value>
+    <value>Bienvenue</value>
   </data>
   <data name="BankAccounts" xml:space="preserve">
-    <value>Bank Accounts</value>
+    <value>Compte bancaire</value>
   </data>
   <data name="FinancialInsights" xml:space="preserve">
-    <value>Financial Insights</value>
+    <value>Aperçus financiers</value>
   </data>
   <data name="NoBankAccountsFound" xml:space="preserve">
-    <value>No bank accounts found.</value>
+    <value>Aucun compte bancaire trouvé.</value>
   </data>
   <data name="GoToACCEBusinessBanking" xml:space="preserve">
-    <value>Go to ACCE Business Banking</value>
+    <value>Accéder à ACCE Business Banking</value>
   </data>
   <data name="Documents" xml:space="preserve">
-    <value>Documents</value>
+    <value>Déclarations</value>
   </data>
   <data name="Messages-Alerts" xml:space="preserve">
-    <value>Messages/ Alerts</value>
+    <value>Messages/Alertes</value>
   </data>
   <data name="Offers" xml:space="preserve">
-    <value>Offers</value>
+    <value>Offres</value>
   </data>
   <data name="Banking" xml:space="preserve">
-    <value>Baking</value>
+    <value>Bancaire</value>
   </data>
   <data name="Print" xml:space="preserve">
-    <value>Print</value>
+    <value>Imprimer</value>
   </data>
   <data name="Alerts" xml:space="preserve">
-    <value>Alerts</value>
+    <value>Alertes</value>
   </data>
   <data name="ForYou" xml:space="preserve">
-    <value>For You</value>
+    <value>Pour toi</value>
   </data>
   <data name="Beyond" xml:space="preserve">
-    <value>Beyond</value>
+    <value>Au-delà</value>
   </data>
   <data name="PointsText" xml:space="preserve">
-    <value>Get 30,000 points on a new ACCE Avion Visa</value>
+    <value>Obtenez 30 000 points sur une nouvelle carte ACCE Avion Visa</value>
   </data>
   <data name="PointsSubText" xml:space="preserve">
-    <value>When you open your first ACCE Avion Visa Credit Card Account by July 31, 2019.</value>
+    <value>Lorsque vous ouvrez votre premier compte de carte de crédit Visa ACCE Avion avant le 31 juillet 2019.</value>
   </data>
   <data name="eBills" xml:space="preserve">
     <value>eBills</value>
   </data>
   <data name="UtilityBillSavings" xml:space="preserve">
-    <value>Utility Bill Savings</value>
+    <value>Économies sur les factures de services publics</value>
   </data>
   <data name="UtilityBillSavingsSubtext" xml:space="preserve">
-    <value>Your utility expenses are down 15% this month. Great job conserving energy!</value>
+    <value>Vos dépenses énergétiques ont baissé de 15 % ce mois-ci. Bravo pour vos économies d'énergie !</value>
   </data>
   <data name="Dining Expenses Rising" xml:space="preserve">
-    <value>Dining Expenses Rising</value>
+    <value>Les dépenses de restauration augmentent</value>
   </data>
   <data name="Dining Expenses Rising Subtext" xml:space="preserve">
-    <value>Your spending on dining has increased by 20% this month compared to your average.
-</value>
+    <value>Vos dépenses en restauration ont augmenté de 20 % ce mois-ci par rapport à votre moyenne.</value>
   </data>
   <data name="RecurringSubscription" xml:space="preserve">
-    <value>Recurring Subscription</value>
+    <value>Abonnement récurrent</value>
   </data>
   <data name="RecurringSubscriptionSubtext" xml:space="preserve">
-    <value>We detected a new $12.99 monthly charge from StreamFlix starting this month.
-</value>
+    <value>Nous avons détecté un nouveau tarif mensuel de 12,99 $ de StreamFlix à partir de ce mois-ci.</value>
   </data>
   <data name="InvestmentSummary" xml:space="preserve">
-    <value>Investment Summary</value>
+    <value>Résumé de l'investissement</value>
   </data>
   <data name="Investments" xml:space="preserve">
-    <value>Investments</value>
+    <value>Investissements</value>
   </data>
   <data name="PurchaseInvestment" xml:space="preserve">
-    <value>Purchase an Investment</value>
+    <value>Acheter un investissement</value>
   </data>
   <data name="Total" xml:space="preserve">
-    <value>Total</value>
+    <value>Totale</value>
   </data>
   <data name="MortgageSummary" xml:space="preserve">
-    <value>Mortgage Summary</value>
+    <value>Sommaire du prêt hypothécaire</value>
   </data>
   <data name="Mortgage" xml:space="preserve">
-    <value>Mortgage</value>
+    <value>Hypothèque</value>
   </data>
   <data name="MortgageSubtext" xml:space="preserve">
-    <value>Start a Mortgage pre-approval</value>
+    <value>Démarrer une pré-approbation hypothécaire</value>
   </data>
   <data name="MortgageValueText" xml:space="preserve">
-    <value>How much is my home worth?</value>
+    <value>Combien vaut ma maison?</value>
   </data>
   <data name="AccountSummary" xml:space="preserve">
-    <value>Account Summary</value>
+    <value>Sommaire du compte</value>
   </data>
   <data name="ContactUs" xml:space="preserve">
-    <value>Contact Us</value>
+    <value>
+Contactez-nous</value>
   </data>
   <data name="MyAccounts" xml:space="preserve">
-    <value>My Accounts</value>
+    <value>Mes comptes</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>Maison</value>
   </data>
   <data name="Products &amp; Services" xml:space="preserve">
-    <value>Products &amp; Services</value>
+    <value>Produits et services</value>
   </data>
   <data name="ProfileAccountSettings" xml:space="preserve">
-    <value>Profile &amp; Account Settings</value>
+    <value>Paramètres de profil et de compte</value>
   </data>
   <data name="PaySendReceiveMoney" xml:space="preserve">
-    <value>Pay, Send &amp; Receive Money</value>
+    <value>Payer, envoyer et recevoir de l'argent</value>
   </data>
   <data name="QuickPaymentsTranfers" xml:space="preserve">
-    <value>Quick Payments &amp; Tranfers</value>
+    <value>Paiements et transferts rapides</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>From</value>
+    <value>Depuis</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>To</value>
+    <value>À</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
+    <value>Montant</value>
   </data>
   <data name="Enteryourquestionhere" xml:space="preserve">
-    <value>Enter your question here</value>
+    <value>Entrez votre question ici</value>
   </data>
   <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
+    <value>Soumettre</value>
   </data>
   <data name="PaywithACCERewardsPoints" xml:space="preserve">
-    <value>Pay with ACCE Rewards Points</value>
+    <value>Payer avec des points de récompense ACCE</value>
   </data>
   <data name="TransfersandPayments" xml:space="preserve">
-    <value>Transfers and Payments</value>
+    <value>Transferts et paiements</value>
   </data>
   <data name="SendInternationalMoneyTransfer" xml:space="preserve">
-    <value>Send an International Money Transfer</value>
+    <value>Envoyer un virement d'argent international</value>
   </data>
   <data name="PurchaseForeignCash" xml:space="preserve">
-    <value>Purchase Foreign Cash</value>
+    <value>Acheter des espèces étrangères</value>
   </data>
   <data name="RegisterforINTERACe-TransferAutoDeposit" xml:space="preserve">
-    <value>Register for INTERAC e-Transfer AutoDeposit</value>
+    <value>Inscrivez-vous au dépôt automatique par virement électronique INTERAC</value>
   </data>
   <data name="ManagePre-AuthorizedPayments" xml:space="preserve">
-    <value>Manage Pre-Authorized Payments</value>
+    <value>Gérer les paiements préautorisés</value>
   </data>
   <data name="StopChequeorPreAuthorizedPayment" xml:space="preserve">
-    <value>Stop a Cheque or Pre-Authorized Payment</value>
+    <value>Arrêter un chèque ou un paiement préautorisé</value>
   </data>
   <data name="DailyTransactionLimits" xml:space="preserve">
-    <value>Daily Transaction Limits</value>
+    <value>Limites de transaction quotidiennes</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Search</value>
+    <value>Recherche</value>
   </data>
   <data name="PayABill" xml:space="preserve">
-    <value>Pay a Bill</value>
+    <value>Payer une facture</value>
   </data>
   <data name="PayMultipleBills" xml:space="preserve">
-    <value>Pay Multiple Bills</value>
+    <value>Payer plusieurs factures</value>
   </data>
   <data name="SendInterace-Transfer" xml:space="preserve">
-    <value>Send an Interac e-Transfer</value>
+    <value>Envoyer un virement électronique Interac</value>
   </data>
   <data name="SendMoney" xml:space="preserve">
-    <value>Send Money</value>
+    <value>Envoyer de l'argent</value>
   </data>
   <data name="RequestMoney" xml:space="preserve">
-    <value>Reques tMoney</value>
+    <value>Demander de l'argent</value>
   </data>
   <data name="TransactionHistory" xml:space="preserve">
-    <value>Transaction History</value>
+    <value>Historique des transactions</value>
   </data>
   <data name="ManagePaymentsTransfers" xml:space="preserve">
-    <value>Manage Payments &amp; Transfers</value>
+    <value>Gérer les paiements et les transferts</value>
   </data>
   <data name="ManagePayeesRecipients" xml:space="preserve">
-    <value>Manage Payees &amp; Recipients</value>
+    <value>Gérer les bénéficiaires et les destinataires</value>
   </data>
   <data name="ManageAccounts" xml:space="preserve">
-    <value>Manage Accounts</value>
+    <value>Gérer les comptes</value>
   </data>
   <data name="TransferMoney" xml:space="preserve">
-    <value>Transfer Money</value>
+    <value>Transférer de l'argent</value>
   </data>
   <data name="ManageContact" xml:space="preserve">
-    <value>Manage Contact</value>
+    <value>Gérer les contacts</value>
   </data>
   <data name="ManagePayees" xml:space="preserve">
-    <value>Manage Payees</value>
+    <value>Gérer les bénéficiaires</value>
   </data>
   <data name="Transfer Money Successful!" xml:space="preserve">
-    <value>Transfer Money Successful!</value>
+    <value>Transfert d'argent réussi !</value>
   </data>
   <data name="back" xml:space="preserve">
-    <value>Back</value>
+    <value>Retour</value>
   </data>
   <data name="TransferFrom" xml:space="preserve">
-    <value>TransferFrom</value>
+    <value>Transfert depuis</value>
   </data>
   <data name="TransferTo" xml:space="preserve">
-    <value>TransferTo</value>
+    <value>Transférer vers</value>
   </data>
   <data name="StartDate" xml:space="preserve">
-    <value>Start Date</value>
+    <value>Date de début</value>
   </data>
   <data name="EndDate" xml:space="preserve">
-    <value>EndDate</value>
+    <value>Date de fin</value>
   </data>
   <data name="AnotherMember" xml:space="preserve">
-    <value>Another Member</value>
+    <value>un autre membre</value>
   </data>
   <data name="AddContact" xml:space="preserve">
-    <value>Add Contact</value>
+    <value>Ajouter un contact</value>
   </data>
   <data name="ConfirmTransfer" xml:space="preserve">
-    <value>Confirm Transfer</value>
+    <value>Confirmer le transfert</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Continuer</value>
   </data>
   <data name="Memo" xml:space="preserve">
-    <value>Memo</value>
+    <value>Note</value>
   </data>
   <data name="Currency" xml:space="preserve">
-    <value>Currency</value>
+    <value>Devise</value>
   </data>
   <data name="Frequency" xml:space="preserve">
-    <value>Frequency</value>
+    <value>Fréquence</value>
   </data>
   <data name="TransactionProcessingTitle" xml:space="preserve">
-    <value>When are my transactions processed?</value>
+    <value>Quand mes transactions sont-elles traitées ?</value>
   </data>
   <data name="TransactionSameDay" xml:space="preserve">
-    <value>Transactions you make on business days before &lt;strong&gt;6 p.m.&lt;/strong&gt; will be processed by us the same day.</value>
+    <value>Les transactions effectuées les jours ouvrables avant &lt;strong&gt;18 h&lt;/strong&gt; seront traitées par nous le jour même.</value>
   </data>
   <data name="TransactionNextDay" xml:space="preserve">
-    <value>Transactions made at all other times will be processed by us the next business day.</value>
+    <value> Les transactions effectuées en dehors de ces heures seront traitées le jour ouvrable suivant.</value>
   </data>
   <data name="ThirdPartyProcessingTime" xml:space="preserve">
-    <value>Payments to third parties (such as utility bills and non-RBC credit cards) often need more processing time by the third party — which generally takes up to &lt;strong&gt;3 business days&lt;/strong&gt;. It's a good idea to check with these third parties to find out how far in advance you should make the payments in order to meet their due date.</value>
-  </data>
-  <data name="PayMultiInstruction1" xml:space="preserve">
-    <value>Paying several bills at once is easy. Just select a payee and enter an amount for each bill.</value>
-  </data>
-  <data name="PayMultiInstruction2" xml:space="preserve">
-    <value>If you're paying someone new, don't forget to add new payees to your list first.</value>
-  </data>
-  <data name="TransactionsSameDay" xml:space="preserve">
-    <value>Transactions you make on business days before &lt;strong&gt;6 p.m.&lt;/strong&gt; will be processed by us the same day.</value>
-  </data>
-  <data name="TransactionsNextDay" xml:space="preserve">
-    <value>Transactions made at all other times will be processed by us the next business day.</value>
-  </data>
-  <data name="TransactionsThirdParty" xml:space="preserve">
-    <value>Payments to third parties (such as utility bills and non-RBC credit cards) often need more processing time by the third party -- which generally takes up to 3 days.</value>
-  </data>
-  <data name="PayMultiInstruction3" xml:space="preserve">
-    <value>Remember that your bills will be paid in the order you enter them below. If your account runs out of funds to pay for a bill in your list, all items following it won't be processed either. So make sure to put the most important ones first.</value>
-  </data>
-  <data name="SelectPayee" xml:space="preserve">
-    <value>Select Payee</value>
-  </data>
-  <data name="AddBillPayee" xml:space="preserve">
-    <value>Add bill payee</value>
-  </data>
-  <data name="PayeeName" xml:space="preserve">
-    <value>Payee Name</value>
-  </data>
-  <data name="PayeeType" xml:space="preserve">
-    <value>Payee Type</value>
-  </data>
-  <data name="AccountNumber" xml:space="preserve">
-    <value>Account Number</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="EnterAmount" xml:space="preserve">
-    <value>Enter Amount</value>
+    <value>Les paiements à des tiers (comme les factures de services publics et les cartes de crédit non RBC) nécessitent souvent plus de temps de traitement par le tiers — ce qui prend généralement jusqu’à &lt;strong&gt;3 jours ouvrables&lt;/strong&gt;. Il est conseillé de vérifier auprès de ces tiers à quel moment effectuer les paiements afin de respecter leur date d’échéance.</value>
   </data>
   <data name="Select" xml:space="preserve">
-    <value>Select</value>
+    <value>Sélectionner</value>
+  </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="NickName" xml:space="preserve">
+    <value>Surnom</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Numéro de téléphone</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="SendTransfersBy" xml:space="preserve">
+    <value>Envoyer les virements par</value>
+  </data>
+  <data name="EmailMethod" xml:space="preserve">
+    <value>E-mail</value>
+  </data>
+  <data name="MobilePhoneMethod" xml:space="preserve">
+    <value>Téléphone portable</value>
+  </data>
+  <data name="PreferredLanguage" xml:space="preserve">
+    <value>Langue préférée du contact</value>
+  </data>
+  <data name="SaveContact" xml:space="preserve">
+    <value>Enregistrer le contact</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="PleaseEnterName" xml:space="preserve">
+    <value>Veuillez saisir le nom du contact.</value>
+  </data>
+  <data name="PleaseEnterPhone" xml:space="preserve">
+    <value>Veuillez entrer un numéro de téléphone valide à 10 chiffres.</value>
+  </data>
+  <data name="PleaseEnterEmail" xml:space="preserve">
+    <value>Veuillez saisir une adresse e-mail valide.</value>
+  </data>
+  <data name="PleaseSelectTransferMethod" xml:space="preserve">
+    <value>Veuillez sélectionner au moins une méthode de transfert.</value>
+  </data>
+  <data name="PleaseSelectPreferredLanguage" xml:space="preserve">
+    <value>Veuillez sélectionner une langue préférée.</value>
+  </data>
+  <data name="PayBillSuccess" xml:space="preserve">
+    <value>Paiement de facture réussi !</value>
+  </data>
+  <data name="FromAccount" xml:space="preserve">
+    <value>Du compte :</value>
+  </data>
+  <data name="PaymentDate" xml:space="preserve">
+    <value>Date de paiement :</value>
+  </data>
+  <data name="PaidTo" xml:space="preserve">
+    <value>Payé à :</value>
+  </data>
+  <data name="TransactionNumber" xml:space="preserve">
+    <value>Numéro de transaction</value>
+  </data>
+  <data name="Payee" xml:space="preserve">
+    <value>Bénéficiaire</value>
+  </data>
+  <data name="Done" xml:space="preserve">
+    <value>Terminé</value>
+  </data>
+  <data name="AddPayee" xml:space="preserve">
+    <value>+ Ajouter un bénéficiaire</value>
+  </data>
+  <data name="AddBillPayee" xml:space="preserve">
+    <value>cc</value>
+  </data>
+  <data name="SelectPayee" xml:space="preserve">
+    <value>Sélectionner un bénéficiaire</value>
+  </data>
+  <data name="EnterAmount" xml:space="preserve">
+    <value>Entrer le montant</value>
+  </data>
+  <data name="ConfirmBillPayment" xml:space="preserve">
+    <value>Confirmer le paiement de la facture</value>
+  </data>
+  <data name="ConfirmAndPay" xml:space="preserve">
+    <value>Confirmer et payer</value>
+  </data>
+  <data name="PayeeName" xml:space="preserve">
+    <value>Nom du bénéficiaire</value>
+  </data>
+  <data name="PayeeType" xml:space="preserve">
+    <value>Type de bénéficiaire</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Numéro de compte</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="PayeeNameRequired" xml:space="preserve">
+    <value>Le nom du bénéficiaire est requis.</value>
+  </data>
+  <data name="PayeeTypeRequired" xml:space="preserve">
+    <value>Le type de bénéficiaire est requis.</value>
+  </data>
+  <data name="AccountNumberRequired" xml:space="preserve">
+    <value>Le numéro de compte est requis.</value>
+  </data>
+  <data name="TransactionsInfoTitle" xml:space="preserve">
+    <value>Quand mes transactions sont-elles traitées ?</value>
+  </data>
+  <data name="c" xml:space="preserve">
+    <value>Les transactions effectuées les jours ouvrables avant 18 h seront traitées par nous le jour même.</value>
+  </data>
+  <data name="TransactionsNextDay" xml:space="preserve">
+    <value>Les transactions effectuées à d'autres moments seront traitées le jour ouvrable suivant.</value>
+  </data>
+  <data name="TransactionsThirdParty" xml:space="preserve">
+    <value>Les paiements à des tiers (comme les factures de services publics et les cartes de crédit non RBC) nécessitent souvent plus de temps de traitement par le tiers -- ce qui prend généralement jusqu'à 3 jours.</value>
   </data>
 </root>

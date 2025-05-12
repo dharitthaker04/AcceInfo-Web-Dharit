@@ -5,6 +5,9 @@ using Blazored.LocalStorage; // ✅ Add this
 using Microsoft.Extensions.Localization;
 using Microsoft.JSInterop;
 using System.Globalization;
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.Extensions.Localization;
+
 
 // ✅ Set static culture (e.g., "fr")
 var culture = new CultureInfo("fr-FR"); // Change to "fr-FR en-US" to test English
@@ -23,6 +26,8 @@ builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 
+
+builder.Services.AddLocalization(); // ✅ For WebAssembly
 
 await builder.Build().RunAsync();
 

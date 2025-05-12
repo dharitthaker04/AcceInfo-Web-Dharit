@@ -12,6 +12,25 @@
 @inject IJSRuntime JSRuntime
 @inject IJSRuntime JS
 
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@inject IJSRuntime JS
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+
+@inject IStringLocalizer<SharedResource> Localizer
+
+@using Blazored.LocalStorage
+@using System.Text.Json
+@using Microsoft.Extensions.Localization
+@inject ILocalStorageService LocalStorage
+@inject IStringLocalizer<AcceInfo_Web.Pages.Index> Localizer
+
+@using System.Text.Json
+@using System.Net.Http.Headers
+@using System.Text
+
+
 
 @if (IsLoading)
 {
@@ -31,13 +50,13 @@
                     <div class="col-md-12">
                         <div class="ribbon-1">
                             <div class="ribbon-box">
-                                <h3><div class="ribbon ribbon-mark bg-primary">Pay a Bill</div></h3>
+                                <h3><div class="ribbon ribbon-mark bg-primary">@Localizer["PayABill"]</div></h3>
 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="tab-content" id="profile-tabContent">
                                             <div class="tab-pane fade show active">
-                                                @* <h3 class="text-primary"><u>Pay a Bill</u></h3> *@
+                                                @* <h3 class="text-primary"><u>@Localizer["PayABill"]</u></h3> *@
 
                                                 @if (ShowSuccessMessage)
                                                 {
@@ -45,31 +64,31 @@
                                                         <div class="card-body">
                                                             <div class="text-center text-success">
                                                                 <i class="fas fa-check-circle fa-2x mb-2"></i>
-                                                                <h5 class="font-weight-bold">Pay a Bill Successful!</h5>
+                                                                <h5 class="font-weight-bold">@Localizer["PayBillSuccess"]</h5>
                                                                 <p>@DateTime.Now.ToString("MMM dd, yyyy 'at' h:mm tt") ET</p>
                                                             </div>
 
                                                             <hr />
 
-                                                            <h6 class="text-primary font-weight-bold"><u>Pay a Bill Details</u></h6>
+                                                            <h6 class="text-primary font-weight-bold"><u>@Localizer["PayBillDetails"]</u></h6>
                                                             <dl class="row">
 
-                                                                <dt class="col-sm-5">Transaction ID:</dt>
+                                                                <dt class="col-sm-5">@Localizer["TransactionID"]</dt>
                                                                 <dd class="col-sm-7 text-success">@TransactionNumber</dd>
 
-                                                                <dt class="col-sm-5">From Account:</dt>
+                                                                <dt class="col-sm-5">@Localizer["FromAccount"]</dt>
                                                                 <dd class="col-sm-7">@SelectedFromSummary</dd>
 
-                                                                <dt class="col-sm-5">To Payee:</dt>
+                                                                <dt class="col-sm-5">@Localizer["ToPayee"]</dt>
                                                                 <dd class="col-sm-7">@SelectedToSummary</dd>
 
-                                                                <dt class="col-sm-5">Amount:</dt>
+                                                                <dt class="col-sm-5">@Localizer["Amount"]</dt>
                                                                 <dd class="col-sm-7">@($"{Convert.ToDecimal(Model.Amount):C2}")</dd>
 
-                                                                <dt class="col-sm-5">Frequency:</dt>
+                                                                <dt class="col-sm-5">@Localizer["Frequency"]</dt>
                                                                 <dd class="col-sm-7">@Model.Frequency</dd>
 
-                                                                <dt class="col-sm-5">Payment Date:</dt>
+                                                                <dt class="col-sm-5">@Localizer["PaymentDate"]</dt>
                                                                 <dd class="col-sm-7">@DateTime.UtcNow.ToString("MMMM dd, yyyy")</dd>
 
                                                             </dl>
@@ -91,40 +110,40 @@
                                                                 <div class="card-header bg-primary text-white"><h5 class="mb-0"><i class="fas fa-receipt"></i> Confirmation</h5></div>
                                                                 <div class="card-body">
                                                                     <dl class="row mb-0">
-                                                                        <dt class="col-sm-4">Pay From:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["PayFrom"]</dt>
                                                                         <dd class="col-sm-8">@SelectedFromSummary</dd>
-                                                                        <dt class="col-sm-4">Pay To:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["PayTo"]</dt>
                                                                         <dd class="col-sm-8">@SelectedToSummary</dd>
 
-                                                                        <dt class="col-sm-4">Amount:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["Amount"]</dt>
                                                                         <dd class="col-sm-8 text-primary font-weight-bold">@($"{Convert.ToDecimal(Model.Amount):C2}")</dd>
 
-                                                                        <dt class="col-sm-4">Frequency:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["Frequency"]</dt>
                                                                         <dd class="col-sm-8">@Model.Frequency</dd>
 
                                                                         @if (Model.Frequency == "Once")
                                                                         {
-                                                                            <dt class="col-sm-4">Date:</dt>
+                                                                            <dt class="col-sm-4">@Localizer["Date"]</dt>
                                                                             <dd class="col-sm-8">@Model.Date?.ToString("yyyy-MM-dd")</dd>
                                                                         }
                                                                         else
                                                                         {
-                                                                            <dt class="col-sm-4">Start Date:</dt>
+                                                                            <dt class="col-sm-4">@Localizer["StartDate"]:</dt>
                                                                             <dd class="col-sm-8">@Model.StartDate?.ToString("yyyy-MM-dd")</dd>
-                                                                            <dt class="col-sm-4">End Date:</dt>
+                                                                            <dt class="col-sm-4">@Localizer["EndDate"]:</dt>
                                                                             <dd class="col-sm-8">@Model.EndDate?.ToString("yyyy-MM-dd")</dd>
                                                                         }
 
-                                                                        <dt class="col-sm-4">Memo:</dt>
+                                                                        <dt class="col-sm-4">@Localizer["Memo"]</dt>
                                                                         <dd class="col-sm-8">@Model.Memo</dd>
                                                                     </dl>
                                                                     <div class="text-right mt-3">
                                                                         <div class="row justify-content-end">
                                                                             <div class="col-md-3">
-                                                                                <button class="btn btn-outline-primary w-100" @onclick="BackToForm">Back</button>
+                                                                                <button class="btn btn-outline-primary w-100" @onclick="BackToForm">@Localizer["Back"]</button>
                                                                             </div>
                                                                             <div class="col-md-4">
-                                                                                <button class="btn btn-primary w-100" @onclick="SubmitPayBill">Confirm Pay a Bill</button>
+                                                                                <button class="btn btn-primary w-100" @onclick="SubmitPayBill">@Localizer["ConfirmPayABill"]</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -142,7 +161,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <label>Pay from <small class="text-danger font-13">*</small></label>
+                                                                            <label>@Localizer["PayFrom"] <small class="text-danger font-13">*</small></label>
                                                                             <select class="form-control" @bind="Model.AccountId">
                                                                                 <option value="">Select</option>
                                                                                 @foreach (var account in Accounts)
@@ -158,16 +177,16 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <label>Pay To <small class="text-danger font-13">*</small></label>
-                                                                            <select class="form-control" @bind="Model.PayeeId">
+                                                                            <label>@Localizer["PayTo"] <small class="text-danger font-13">*</small></label>                                                                            <select class="form-control" @bind="Model.PayeeId">
                                                                                 <option value="">Select</option>
                                                                                 @foreach (var payee in PayeeList)
                                                                                 {
                                                                                     <option value="@payee.PayeeId">@payee.PayeeName - @payee.PayeeTypeName - @payee.PayeeNumber</option>
                                                                                 }
                                                                             </select>
-                                                                            <button type="button" class="btn btn-outline-primary btn-sm  mt-2  float-right" @onclick="ShowAddModal">+ Add payee</button>
-                                                                            <ValidationMessage For="@(() => Model.PayeeId)" class="text-danger" />
+                                                                            <button type="button" class="btn btn-outline-primary btn-sm mt-2 float-right" @onclick="ShowAddModal">
+                                                                                + @Localizer["AddPayee"]
+                                                                            </button>                                                                            <ValidationMessage For="@(() => Model.PayeeId)" class="text-danger" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -175,15 +194,13 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label>Amount <small class="text-danger font-13">*</small></label>
-                                                                            <InputText class="form-control" @bind-Value="Model.Amount" />
+                                                                            <label>@Localizer["Amount"] <small class="text-danger font-13">*</small></label>                                                                            <InputText class="form-control" @bind-Value="Model.Amount" />
                                                                             <ValidationMessage For="@(() => Model.Amount)" class="text-danger" />
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6">
                                                                         <div class="form-group">
-                                                                            <label>Frequency <small class="text-danger font-13">*</small></label>
-                                                                            <select class="form-control" @bind="Model.Frequency">
+                                                                            <label>@Localizer["Frequency"] <small class="text-danger font-13">*</small></label>                                                                            <select class="form-control" @bind="Model.Frequency">
                                                                                 <option value="Once">Once</option>
                                                                                 <option value="Weekly">Weekly</option>
                                                                                 <option value="Monthly">Monthly</option>
@@ -201,7 +218,7 @@
                                                                     {
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
-                                                                                <label>Date</label>
+                                                                                <label>@Localizer["Date"]</label>
                                                                                 <InputDate class="form-control" @bind-Value="Model.Date" />
                                                                                 <ValidationMessage For="@(() => Model.Date)" class="text-danger" />
                                                                             </div>
@@ -211,14 +228,14 @@
                                                                     {
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
-                                                                                <label>Start Date</label>
+                                                                                <label>@Localizer["StartDate"]</label>
                                                                                 <InputDate class="form-control" @bind-Value="Model.StartDate" />
                                                                                 <ValidationMessage For="@(() => Model.StartDate)" class="text-danger" />
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <div class="form-group">
-                                                                                <label>End Date</label>
+                                                                                <label>@Localizer["EndDate"]</label>
                                                                                 <InputDate class="form-control" @bind-Value="Model.EndDate" />
                                                                                 <ValidationMessage For="@(() => Model.EndDate)" class="text-danger" />
                                                                             </div>
@@ -229,7 +246,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-group">
-                                                                            <label>Memo</label>
+                                                                            <label>@Localizer["Memo"]</label>
                                                                             <InputText class="form-control" @bind-Value="Model.Memo" />
                                                                         </div>
                                                                     </div>
@@ -237,10 +254,10 @@
 
                                                                 <div class="row justify-content-end">
                                                                     <div class="col-md-3">
-                                                                        <button type="reset" class="btn btn-outline-primary w-100">Clear</button>
+                                                                        <button type="reset" class="btn btn-outline-primary w-100">@Localizer["Clear"]</button>
                                                                     </div>
                                                                     <div class="col-md-3">
-                                                                        <button type="submit" class="btn btn-primary w-100">Continue</button>
+                                                                        <button type="submit" class="btn btn-primary w-100">@Localizer["Continue"]</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -254,10 +271,10 @@
                                                         <div class="row">
                                                             <div class="col-md-12">
                                                                 <div class="alert alert-outline-primary mb-0" role="alert">
-                                                                    <h4 class="alert-heading font-18"><i class="fas fa-comments"></i> When are my transactions processed?</h4>
-                                                                    <p>Transactions you make on business days before 6:00 pm will be processed by us the same day.</p>
-                                                                    <p>Transactions made at all other times will be processed by us the next business day.</p>
-                                                                    <p>Payments to third parties (such as utility bills and non-RBC credit cards) often need more processing time by the third party -- which generally takes up to 3 days.</p>
+                                                                    <h4 class="alert-heading font-18"><i class="fas fa-comments"></i>@Localizer["TransactionProcessingTitle"]</h4>
+                                                                    <p>@Localizer["TransactionsSameDay"]</p>
+                                                                    <p>@Localizer["TransactionsNextDay"]</p>
+                                                                    <p>@Localizer["TransactionsThirdParty"]</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -288,21 +305,21 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content form-horizontal">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editor-title">Add Payee</h5>
+                        <h5 class="modal-title" id="editor-title">@Localizer["AddPayee"]</h5>
                         <button type="button" class="close" @onclick="CloseModal"><span>&times;</span></button>
                     </div>
                     <div class="modal-body">
                         <div class="col-sm-12 mb-3">
-                            <label>Payee Name <small class="text-danger font-13">*</small></label>
+                            <label>@Localizer["PayeeName"]<small class="text-danger font-13">*</small></label>
                             <input type="text" class="form-control" @bind="newPayee.PayeeName" @oninput="(e) => ShowPayeeNameError = string.IsNullOrWhiteSpace(e.Value?.ToString())" />
                         @if (ShowPayeeNameError)
                         {
-                                    <div class="text-danger">Payee Name is required.</div>
+                                    <div class="text-danger">@Localizer["PayeeNameRequired"]</div>
                         }
                         </div>
 
                         <div class="col-sm-12 mb-3">
-                            <label>Payee Type <small class="text-danger font-13">*</small></label>
+                            <label>@Localizer["PayeeType"]<small class="text-danger font-13">*</small></label>
                             <select class="form-control" @bind="PayeeTypeProxy" @bind:event="onchange">
                                 <option value="">-- Select --</option>
                             @foreach (var category in payeeCategories)
@@ -312,22 +329,22 @@
                             </select>
                         @if (ShowPayeeTypeError)
                         {
-                                    <div class="text-danger">Payee Type is required.</div>
+                                    <div class="text-danger">@Localizer["PayeeTypeRequired"]</div>
                         }
                         </div>
 
                         <div class="col-sm-12 mb-3">
-                            <label>Account Number <small class="text-danger font-13">*</small></label>
+                            <label>@Localizer["AccountNumber"]<small class="text-danger font-13">*</small></label>
                             <input type="text" class="form-control" @bind="newPayee.PayeeNumber" @oninput="(e) => ShowPayeeNumberError = string.IsNullOrWhiteSpace(e.Value?.ToString())" />
                         @if (ShowPayeeNumberError)
                         {
-                                    <div class="text-danger">Account Number is required.</div>
+                                    <div class="text-danger">@Localizer["AccountNumberRequired"]</div>
                         }
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-primary" @onclick="HandlePayeeSubmit">Save</button>
-                        <button type="button" class="btn btn-danger" @onclick="CloseModal">Cancel</button>
+                        <button class="btn btn-primary" @onclick="HandlePayeeSubmit">@Localizer["Save"]</button>
+                        <button type="button" class="btn btn-danger" @onclick="CloseModal">@Localizer["Cancel"]</button>
                     </div>
                 </div>
             </div>

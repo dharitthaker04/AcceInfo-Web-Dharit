@@ -1,52 +1,110 @@
-<?xml version='1.0' encoding='utf-8'?>
-<root xmlns:ns1="urn:schemas-microsoft-com:xml-msdata" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  
-  <xs:schema id="root">
-    <xs:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xs:element name="root" ns1:IsDataSet="true">
-      <xs:complexType>
-        <xs:choice maxOccurs="unbounded">
-          <xs:element name="metadata">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" />
-              </xs:sequence>
-              <xs:attribute name="name" use="required" type="xsd:string" />
-              <xs:attribute name="type" type="xsd:string" />
-              <xs:attribute name="mimetype" type="xsd:string" />
-              <xs:attribute ref="xml:space" />
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="assembly">
-            <xs:complexType>
-              <xs:attribute name="alias" type="xsd:string" />
-              <xs:attribute name="name" type="xsd:string" />
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="data">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
-                <xs:element name="comment" type="xsd:string" minOccurs="0" ns1:Ordinal="2" />
-              </xs:sequence>
-              <xs:attribute name="name" type="xsd:string" use="required" ns1:Ordinal="1" />
-              <xs:attribute name="type" type="xsd:string" ns1:Ordinal="3" />
-              <xs:attribute name="mimetype" type="xsd:string" ns1:Ordinal="4" />
-              <xs:attribute ref="xml:space" />
-            </xs:complexType>
-          </xs:element>
-          <xs:element name="resheader">
-            <xs:complexType>
-              <xs:sequence>
-                <xs:element name="value" type="xsd:string" minOccurs="0" ns1:Ordinal="1" />
-              </xs:sequence>
-              <xs:attribute name="name" type="xsd:string" use="required" />
-            </xs:complexType>
-          </xs:element>
-        </xs:choice>
-      </xs:complexType>
-    </xs:element>
-  </xs:schema>
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -295,7 +353,7 @@ Contactez-nous</value>
     <value>Date de fin</value>
   </data>
   <data name="AnotherMember" xml:space="preserve">
-    <value>un autre membre</value>
+    <value>Un autre membre</value>
   </data>
   <data name="AddContact" xml:space="preserve">
     <value>Ajouter un contact</value>
@@ -330,4 +388,51 @@ Contactez-nous</value>
   <data name="ThirdPartyProcessingTime" xml:space="preserve">
     <value>Les paiements à des tiers (comme les factures de services publics et les cartes de crédit non RBC) nécessitent souvent plus de temps de traitement par le tiers — ce qui prend généralement jusqu’à &lt;strong&gt;3 jours ouvrables&lt;/strong&gt;. Il est conseillé de vérifier auprès de ces tiers à quel moment effectuer les paiements afin de respecter leur date d’échéance.</value>
   </data>
-<data xml:space="preserve" name="Select"><value>Sélectionner</value></data><data xml:space="preserve" name="NameLabel"><value>Nom</value></data><data xml:space="preserve" name="NickName"><value>Surnom</value></data><data xml:space="preserve" name="PhoneNumber"><value>Numéro de téléphone</value></data><data xml:space="preserve" name="Email"><value>E-mail</value></data><data xml:space="preserve" name="SendTransfersBy"><value>Envoyer les virements par</value></data><data xml:space="preserve" name="EmailMethod"><value>E-mail</value></data><data xml:space="preserve" name="MobilePhoneMethod"><value>Téléphone portable</value></data><data xml:space="preserve" name="PreferredLanguage"><value>Langue préférée du contact</value></data><data xml:space="preserve" name="SaveContact"><value>Enregistrer le contact</value></data><data xml:space="preserve" name="Cancel"><value>Annuler</value></data><data xml:space="preserve" name="PleaseEnterName"><value>Veuillez saisir le nom du contact.</value></data><data xml:space="preserve" name="PleaseEnterPhone"><value>Veuillez entrer un numéro de téléphone valide à 10 chiffres.</value></data><data xml:space="preserve" name="PleaseEnterEmail"><value>Veuillez saisir une adresse e-mail valide.</value></data><data xml:space="preserve" name="PleaseSelectTransferMethod"><value>Veuillez sélectionner au moins une méthode de transfert.</value></data><data xml:space="preserve" name="PleaseSelectPreferredLanguage"><value>Veuillez sélectionner une langue préférée.</value></data></root>
+  <data name="PayMultiInstruction1" xml:space="preserve">
+    <value> Payer plusieurs factures à la fois est facile. Il suffit de sélectionner un bénéficiaire et de saisir un montant pour chaque facture.</value>
+  </data>
+  <data name="PayMultiInstruction2" xml:space="preserve">
+    <value> Si vous payez quelqu'un de nouveau, n'oubliez pas d'ajouter d'abord ce bénéficiaire à votre liste.
+PayMultiInstruction3 N'oubliez pas que vos factures seront payées dans l'ordre d'entrée. Si votre compte ne dispose pas de fonds suffisants pour l'une d'entre elles, les suivantes ne seront pas traitées. Mettez donc les plus importantes en premier.
+</value>
+  </data>
+  <data name="TransactionsSameDay" xml:space="preserve">
+    <value>Les transactions effectuées les jours ouvrables avant &lt;strong&gt;18 h&lt;/strong&gt; seront traitées par nous le jour même.</value>
+  </data>
+  <data name="TransactionsNextDay" xml:space="preserve">
+    <value>Les transactions effectuées à d'autres moments seront traitées le jour ouvrable suivant.</value>
+  </data>
+  <data name="TransactionsThirdParty" xml:space="preserve">
+    <value>Les paiements à des tiers (comme les factures de services publics et les cartes de crédit non RBC) nécessitent souvent plus de temps de traitement par le tiers -- ce qui prend généralement jusqu'à 3 jours.</value>
+  </data>
+  <data name="PayMultiInstruction3" xml:space="preserve">
+    <value>N'oubliez pas que vos factures seront payées dans l'ordre d'entrée. Si votre compte ne dispose pas de fonds suffisants pour l'une d'entre elles, les suivantes ne seront pas traitées. Mettez donc les plus importantes en premier.</value>
+  </data>
+  <data name="SelectPayee" xml:space="preserve">
+    <value>Sélectionner un bénéficiaire</value>
+  </data>
+  <data name="AddBillPayee" xml:space="preserve">
+    <value>Ajouter un bénéficiaire de facture</value>
+  </data>
+  <data name="PayeeName" xml:space="preserve">
+    <value>Nom du bénéficiaire</value>
+  </data>
+  <data name="PayeeType" xml:space="preserve">
+    <value>Type de bénéficiaire</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Numéro de compte</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="EnterAmount" xml:space="preserve">
+    <value>Entrer le montant</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Sélectionner </value>
+  </data>
+</root>
